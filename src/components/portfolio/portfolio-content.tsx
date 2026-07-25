@@ -112,29 +112,31 @@ export function PortfolioContent() {
               <span className="section-title">{t.sections.credentials}</span>
               <span className="section-rule" aria-hidden="true" />
             </div>
-            <StaggerContainer>
-              <table className="cred-table">
-                <thead>
-                  <tr>
-                    {t.credentials.headers.map((h, i) => (
-                      <th key={i}>{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {t.credentials.rows.map((row, i) => (
-                    <StaggerItem key={i}>
-                      <tr>
-                        <td className="cred-firm">{row.firm}</td>
-                        <td className="cred-status">{row.status}</td>
-                        <td className="cred-amount">{row.amount}</td>
-                        <td>{row.date}</td>
-                      </tr>
-                    </StaggerItem>
+            <table className="cred-table">
+              <thead>
+                <tr>
+                  {t.credentials.headers.map((h, i) => (
+                    <th key={i}>{h}</th>
                   ))}
-                </tbody>
-              </table>
-            </StaggerContainer>
+                </tr>
+              </thead>
+              <tbody>
+                {t.credentials.rows.map((row, i) => (
+                  <motion.tr
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <td className="cred-firm">{row.firm}</td>
+                    <td className="cred-status">{row.status}</td>
+                    <td className="cred-amount">{row.amount}</td>
+                    <td>{row.date}</td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
             <CertificateGallery
               certificates={[
                 { src: "/evidence/aquafunded.png", alt: t.credentials.rows[0].status, firm: t.credentials.rows[0].firm },
