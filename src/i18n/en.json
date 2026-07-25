@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "title": "Rizqi Akbar Pratama — Portfolio",
+    "description": "Portfolio of Rizqi Akbar Pratama — Builder, Solo Developer & Funded Trader from Kebumen, Central Java."
+  },
+  "titleblock": {
+    "role": "Builder · Solo Developer · Funded Trader",
+    "mark": "REV. 2026 · KEBUMEN, ID",
+    "fields": {
+      "email": "Email",
+      "location": "Location",
+      "education": "Education",
+      "focus": "Current Focus"
+    },
+    "values": {
+      "location": "Kebumen, Central Java",
+      "education": "Vocational HS · Machining Engineering",
+      "focus": "Digital products & trading"
+    }
+  },
+  "summary": "From a <strong>Machining Engineering</strong> background, not formal computer science — but building and running <strong>LuxTrade</strong>, an AI-powered trading journal app, from scratch: directing AI coding agents, reading production logs, auditing database security, and making product & pricing decisions independently. Outside of that, a <strong>trader who passed evaluations at four different prop firms</strong> and running a small bakso (meatball soup) business. Accustomed to meticulous, systematic work — doesn't give up until the root cause is truly found.",
+  "sections": {
+    "project": "Featured Project",
+    "credentials": "Trading Credentials",
+    "skills": "Skills",
+    "experience": "Experience",
+    "education": "Education"
+  },
+  "project": {
+    "name": "LuxTrade",
+    "tag": "luxtradee.web.id",
+    "desc": "AI-powered SaaS trading journal for Indonesian retail traders. Key features: automatic trade data extraction from MT4/MT5 screenshots using AI vision, achievement & reward system, affiliate program, and analytics dashboard. Built and operated solo as a solo developer — from architecture and security to pricing decisions and go-to-market strategy.",
+    "capabilities": [
+      "Directing AI coding agents to build & ship production features",
+      "Systematic debugging via server logs & direct database queries",
+      "Security audit & fixes (data access, authentication, env variables)",
+      "Database schema design & payment integration flow (Midtrans)",
+      "Pricing structure, promotions, and referral program design",
+      "Building & managing user community (Discord)"
+    ]
+  },
+  "credentials": {
+    "headers": {
+      "firm": "Firm",
+      "status": "Status",
+      "accountSize": "Account Size",
+      "date": "Date"
+    },
+    "rows": [
+      {
+        "firm": "Aquafunded",
+        "status": "Certificate of Achievement — Evaluation Passed",
+        "amount": "—",
+        "date": "Jun 18, 2026"
+      },
+      {
+        "firm": "Sure Leverage Funding (SLF)",
+        "status": "Officially Funded Trader",
+        "amount": "—",
+        "date": "Jun 9, 2026"
+      },
+      {
+        "firm": "V Prop Trader",
+        "status": "Evaluation Passed — Verified Prop Trader",
+        "amount": "$1,000",
+        "date": "2026"
+      },
+      {
+        "firm": "PipDance",
+        "status": "Challenge Phase Passed → Evaluation Phase",
+        "amount": "$1,000",
+        "date": "Jul 22, 2026"
+      }
+    ]
+  },
+  "skills": {
+    "groups": [
+      {
+        "title": "Product Building",
+        "items": [
+          "Working effectively with AI coding agents",
+          "Debugging from production logs & databases",
+          "Application & database security fundamentals",
+          "Product management & pricing decisions"
+        ]
+      },
+      {
+        "title": "Trading & Discipline",
+        "items": [
+          "Risk management & money management",
+          "Technical analysis of forex/commodity markets",
+          "Trading performance evaluation & journaling",
+          "Consistency & execution discipline"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "items": [
+      {
+        "period": "Ongoing",
+        "role": "Solo Developer & Founder",
+        "org": "LuxTrade",
+        "desc": "Building and operating an AI trading journal app from zero to active users."
+      },
+      {
+        "period": "Ongoing",
+        "role": "Business Owner",
+        "org": "Bakso Business (small scale)",
+        "desc": "Running a small food business independently.",
+        "evidenceLabel": "Business Proof",
+        "evidenceAlt1": "Bakso product — professional photo",
+        "evidenceAlt2": "Bakso product — kitchen scene"
+      },
+      {
+        "period": "6 months",
+        "role": "Employee",
+        "org": "PT Johnson & Son",
+        "desc": "Formal work experience before fully focusing on building products and trading."
+      }
+    ]
+  },
+  "education": {
+    "period": "Vocational HS",
+    "role": "Machining Engineering",
+    "org": "Kebumen, Central Java"
+  },
+  "certificates": {
+    "label": "Certificate Evidence",
+    "items": [
+      {
+        "firm": "Aquafunded",
+        "alt": "Certificate of Achievement — Evaluation Passed"
+      },
+      {
+        "firm": "Sure Leverage Funding (SLF)",
+        "alt": "Officially Funded Trader — Sure Leverage Funding"
+      },
+      {
+        "firm": "V Prop Trader",
+        "alt": "Evaluation Passed — Verified Prop Trader"
+      },
+      {
+        "firm": "PipDance",
+        "alt": "Challenge Phase Passed → Evaluation Phase"
+      }
+    ]
+  },
+  "footer": {
+    "left": "RIZQI AKBAR PRATAMA — PORTFOLIO",
+    "right": "riskiakbarp123@gmail.com"
+  },
+  "print": "Download as PDF"
+}

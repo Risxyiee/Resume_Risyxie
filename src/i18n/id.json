@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "title": "Rizqi Akbar Pratama — Portofolio",
+    "description": "Portofolio Rizqi Akbar Pratama — Builder, Solo Developer & Funded Trader dari Kebumen, Jawa Tengah."
+  },
+  "titleblock": {
+    "role": "Builder · Solo Developer · Funded Trader",
+    "mark": "REV. 2026 · KEBUMEN, ID",
+    "fields": {
+      "email": "Email",
+      "location": "Lokasi",
+      "education": "Pendidikan",
+      "focus": "Fokus Saat Ini"
+    },
+    "values": {
+      "location": "Kebumen, Jawa Tengah",
+      "education": "SMK · Teknik Pemesinan",
+      "focus": "Produk digital & trading"
+    }
+  },
+  "summary": "Berlatar belakang <strong>Teknik Pemesinan</strong>, bukan ilmu komputer formal — tapi membangun dan menjalankan <strong>LuxTrade</strong>, aplikasi jurnal trading berbasis AI, dari nol: mengarahkan AI coding agent, membaca log produksi, mengaudit keamanan database, dan mengambil keputusan produk & harga sendiri. Di luar itu, seorang <strong>trader yang lolos evaluasi di empat prop firm berbeda</strong> dan menjalankan usaha bakso kecil-kecilan. Terbiasa kerja teliti, sistematis, dan nggak nyerah sebelum akar masalah beneran ketemu.",
+  "sections": {
+    "project": "Proyek Utama",
+    "credentials": "Kredensial Trading",
+    "skills": "Kemampuan",
+    "experience": "Pengalaman",
+    "education": "Pendidikan"
+  },
+  "project": {
+    "name": "LuxTrade",
+    "tag": "luxtradee.web.id",
+    "desc": "Trading journal SaaS berbasis AI untuk trader retail Indonesia. Fitur utama: ekstraksi data trade otomatis dari screenshot MT4/MT5 pakai AI vision, sistem achievement & reward, program affiliate, dan dashboard analitik. Dibangun dan dioperasikan sendiri sebagai solo developer — mulai dari arsitektur, keamanan, sampai keputusan harga & go-to-market.",
+    "capabilities": [
+      "Mengarahkan AI coding agent untuk membangun & memperbaiki fitur produksi",
+      "Debugging sistematis lewat log server & query database langsung",
+      "Audit & perbaikan keamanan (akses data, autentikasi, environment variable)",
+      "Desain skema database & alur integrasi pembayaran (Midtrans)",
+      "Menyusun struktur harga, promosi, dan program referral",
+      "Membangun & mengelola komunitas pengguna (Discord)"
+    ]
+  },
+  "credentials": {
+    "headers": {
+      "firm": "Firm",
+      "status": "Status",
+      "accountSize": "Ukuran Akun",
+      "date": "Tanggal"
+    },
+    "rows": [
+      {
+        "firm": "Aquafunded",
+        "status": "Certificate of Achievement — Evaluation Lulus",
+        "amount": "—",
+        "date": "18 Jun 2026"
+      },
+      {
+        "firm": "Sure Leverage Funding (SLF)",
+        "status": "Resmi Funded Trader",
+        "amount": "—",
+        "date": "9 Jun 2026"
+      },
+      {
+        "firm": "V Prop Trader",
+        "status": "Lulus Evaluasi — Prop Trader Terverifikasi",
+        "amount": "$1,000",
+        "date": "2026"
+      },
+      {
+        "firm": "PipDance",
+        "status": "Lulus Fase Tantangan → Fase Evaluasi",
+        "amount": "$1,000",
+        "date": "22 Jul 2026"
+      }
+    ]
+  },
+  "skills": {
+    "groups": [
+      {
+        "title": "Membangun Produk",
+        "items": [
+          "Bekerja efektif dengan AI coding agent",
+          "Debugging dari log produksi & database",
+          "Dasar keamanan aplikasi & database",
+          "Manajemen produk & keputusan harga"
+        ]
+      },
+      {
+        "title": "Trading & Disiplin",
+        "items": [
+          "Manajemen risiko & money management",
+          "Analisis teknikal pasar forex/komoditas",
+          "Evaluasi & jurnal performa trading",
+          "Konsistensi & disiplin eksekusi"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "items": [
+      {
+        "period": "Berjalan",
+        "role": "Solo Developer & Founder",
+        "org": "LuxTrade",
+        "desc": "Membangun dan mengoperasikan aplikasi jurnal trading AI dari nol hingga digunakan pengguna aktif."
+      },
+      {
+        "period": "Berjalan",
+        "role": "Pemilik Usaha",
+        "org": "Usaha Bakso (skala kecil)",
+        "desc": "Menjalankan usaha kuliner kecil-kecilan secara mandiri.",
+        "evidenceLabel": "Bukti Usaha Bakso",
+        "evidenceAlt1": "Produk bakso — foto profesional",
+        "evidenceAlt2": "Produk bakso — suasana dapur"
+      },
+      {
+        "period": "6 bulan",
+        "role": "Karyawan",
+        "org": "PT Johnson & Son",
+        "desc": "Pengalaman kerja formal sebelum fokus penuh membangun produk sendiri dan trading."
+      }
+    ]
+  },
+  "education": {
+    "period": "SMK",
+    "role": "Teknik Pemesinan",
+    "org": "Kebumen, Jawa Tengah"
+  },
+  "certificates": {
+    "label": "Bukti Sertifikat",
+    "items": [
+      {
+        "firm": "Aquafunded",
+        "alt": "Certificate of Achievement — Evaluation Lulus"
+      },
+      {
+        "firm": "Sure Leverage Funding (SLF)",
+        "alt": "Resmi Funded Trader — Sure Leverage Funding"
+      },
+      {
+        "firm": "V Prop Trader",
+        "alt": "Lulus Evaluasi — Prop Trader Terverifikasi"
+      },
+      {
+        "firm": "PipDance",
+        "alt": "Lulus Fase Tantangan → Fase Evaluasi"
+      }
+    ]
+  },
+  "footer": {
+    "left": "RIZQI AKBAR PRATAMA — PORTOFOLIO",
+    "right": "riskiakbarp123@gmail.com"
+  },
+  "print": "Unduh sebagai PDF"
+}

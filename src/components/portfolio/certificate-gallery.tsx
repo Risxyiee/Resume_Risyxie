@@ -9,9 +9,10 @@ interface CertificateGalleryProps {
     alt: string;
     firm: string;
   }[];
+  label: string;
 }
 
-export function CertificateGallery({ certificates }: CertificateGalleryProps) {
+export function CertificateGallery({ certificates, label }: CertificateGalleryProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -28,7 +29,7 @@ export function CertificateGallery({ certificates }: CertificateGalleryProps) {
   return (
     <>
       <div className="evidence-label">
-        <span className="evidence-label-text">Bukti Sertifikat</span>
+        <span className="evidence-label-text">{label}</span>
         <span className="evidence-label-line" />
       </div>
       <div className="cert-grid">

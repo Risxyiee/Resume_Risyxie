@@ -1,14 +1,13 @@
 "use client";
 
-export function PrintButton() {
+interface PrintButtonProps {
+  t?: string;
+}
+
+export function PrintButton({ t }: PrintButtonProps) {
   return (
-    <div className="print-bar">
-      <button
-        className="print-btn"
-        onClick={() => window.print()}
-      >
-        ⬇ Unduh sebagai PDF
-      </button>
-    </div>
+    <button className="print-btn" onClick={() => window.print()}>
+      ⬇ {t || "Unduh sebagai PDF"}
+    </button>
   );
 }
