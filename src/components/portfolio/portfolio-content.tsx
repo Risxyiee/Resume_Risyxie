@@ -1,32 +1,20 @@
 "use client";
 
-import { useLanguageStore } from "@/stores/language-store";
-import { CertificateGallery } from "./certificate-gallery";
-import { PhotoGallery } from "./photo-gallery";
+import { useI18n } from "./i18n-provider";
 import { PrintButton } from "./print-button";
 import { LanguageToggle } from "./language-toggle";
-import idTranslations from "@/i18n/id.json";
-import enTranslations from "@/i18n/en.json";
-
-const translations = { id: idTranslations, en: enTranslations } as const;
-
-const CERT_FILES = [
-  "/evidence/aquafunded.png",
-  "/evidence/slf.png",
-  "/evidence/v-prop-trader.png",
-  "/evidence/pipdance.png",
-];
+import { CertificateGallery } from "./certificate-gallery";
+import { PhotoGallery } from "./photo-gallery";
 
 export function PortfolioContent() {
-  const { locale } = useLanguageStore();
-  const t = translations[locale];
+  const { t } = useI18n();
 
   return (
     <>
-      {/* Print + Language Bar */}
+      {/* Top Bar */}
       <div className="print-bar">
         <LanguageToggle />
-        <PrintButton t={t.print} />
+        <PrintButton label={t.printBtn} />
       </div>
 
       <div className="portfolio-page" id="resume">
@@ -35,26 +23,26 @@ export function PortfolioContent() {
           <div className="titleblock-top">
             <div>
               <div className="titleblock-name">Rizqi Akbar Pratama</div>
-              <div className="titleblock-role">{t.titleblock.role}</div>
+              <div className="titleblock-role">{t.titleBlock.role}</div>
             </div>
-            <div className="titleblock-mark">{t.titleblock.mark}</div>
+            <div className="titleblock-mark">{t.titleBlock.rev}</div>
           </div>
           <div className="titleblock-fields">
             <div className="field">
-              <div className="field-label">{t.titleblock.fields.email}</div>
+              <div className="field-label">{t.titleBlock.fields.email}</div>
               <div className="field-value">riskiakbarp123@gmail.com</div>
             </div>
             <div className="field">
-              <div className="field-label">{t.titleblock.fields.location}</div>
-              <div className="field-value">{t.titleblock.values.location}</div>
+              <div className="field-label">{t.titleBlock.fields.location}</div>
+              <div className="field-value">Kebumen, Jawa Tengah</div>
             </div>
             <div className="field">
-              <div className="field-label">{t.titleblock.fields.education}</div>
-              <div className="field-value">{t.titleblock.values.education}</div>
+              <div className="field-label">{t.titleBlock.fields.education}</div>
+              <div className="field-value">{t.titleBlock.fields.educationVal}</div>
             </div>
             <div className="field">
-              <div className="field-label">{t.titleblock.fields.focus}</div>
-              <div className="field-value">{t.titleblock.values.focus}</div>
+              <div className="field-label">{t.titleBlock.fields.focus}</div>
+              <div className="field-value">{t.titleBlock.fields.focusVal}</div>
             </div>
           </div>
         </div>
@@ -62,10 +50,7 @@ export function PortfolioContent() {
         <div className="portfolio-content">
           {/* ===== SUMMARY ===== */}
           <section className="section" style={{ marginTop: 36 }}>
-            <p
-              className="summary"
-              dangerouslySetInnerHTML={{ __html: t.summary }}
-            />
+            <p className="summary" dangerouslySetInnerHTML={{ __html: t.summary }} />
           </section>
 
           {/* ===== FEATURED PROJECT ===== */}
@@ -83,9 +68,7 @@ export function PortfolioContent() {
               <p className="project-desc">{t.project.desc}</p>
               <div className="project-grid">
                 {t.project.capabilities.map((cap, i) => (
-                  <div key={i} className="capability">
-                    {cap}
-                  </div>
+                  <div className="capability" key={i}>{cap}</div>
                 ))}
               </div>
             </div>
@@ -101,10 +84,9 @@ export function PortfolioContent() {
             <table className="cred-table">
               <thead>
                 <tr>
-                  <th>{t.credentials.headers.firm}</th>
-                  <th>{t.credentials.headers.status}</th>
-                  <th>{t.credentials.headers.accountSize}</th>
-                  <th>{t.credentials.headers.date}</th>
+                  {t.credentials.headers.map((h, i) => (
+                    <th key={i}>{h}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -119,12 +101,29 @@ export function PortfolioContent() {
               </tbody>
             </table>
             <CertificateGallery
-              certificates={t.certificates.items.map((c, i) => ({
-                src: CERT_FILES[i],
-                alt: c.alt,
-                firm: c.firm,
-              }))}
-              label={t.certificates.label}
+              certificates={[
+                {
+                  src: "/evidence/aquafunded.png",
+                  alt: t.credentials.rows[0].status,
+                  firm: t.credentials.rows[0].firm,
+                },
+                {
+                  src: "/evidence/slf.png",
+                  alt: t.credentials.rows[1].status,
+                  firm: t.credentials.rows[1].firm,
+                },
+                {
+                  src: "/evidence/v-prop-trader.png",
+                  alt: t.credentials.rows[2].status,
+                  firm: t.credentials.rows[2].firm,
+                },
+                {
+                  src: "/evidence/pipdance.png",
+                  alt: t.credentials.rows[3].status,
+                  firm: t.credentials.rows[3].firm,
+                },
+              ]}
+              evidenceLabel={t.credentials.evidenceLabel}
             />
           </section>
 
@@ -160,7 +159,7 @@ export function PortfolioContent() {
               <span className="section-rule" aria-hidden="true" />
             </div>
             {t.experience.items.map((item, i) => (
-              <div key={i}>
+              <span key={i}>
                 <div className="timeline-item">
                   <div className="timeline-period">{item.period}</div>
                   <div>
@@ -172,13 +171,13 @@ export function PortfolioContent() {
                 {"evidenceLabel" in item && (
                   <PhotoGallery
                     photos={[
-                      { src: "/evidence/bakso-1.png", alt: item.evidenceAlt1 },
-                      { src: "/evidence/bakso-2.jpeg", alt: item.evidenceAlt2 },
+                      { src: "/evidence/bakso-1.png", alt: t.experience.baksoPhotos[0].alt },
+                      { src: "/evidence/bakso-2.jpeg", alt: t.experience.baksoPhotos[1].alt },
                     ]}
                     label={item.evidenceLabel}
                   />
                 )}
-              </div>
+              </span>
             ))}
           </section>
 
@@ -204,7 +203,7 @@ export function PortfolioContent() {
           {/* ===== FOOTER ===== */}
           <footer className="portfolio-footer">
             <div className="footer-note">{t.footer.left}</div>
-            <div className="footer-note">{t.footer.right}</div>
+            <div className="footer-note">riskiakbarp123@gmail.com</div>
           </footer>
         </div>
       </div>

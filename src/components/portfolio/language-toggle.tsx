@@ -1,19 +1,18 @@
 "use client";
 
-import { useLanguageStore } from "@/stores/language-store";
+import { useI18n } from "./i18n-provider";
 
 export function LanguageToggle() {
-  const { locale, toggle } = useLanguageStore();
+  const { locale, toggle, t } = useI18n();
 
   return (
     <button
       className="lang-toggle"
       onClick={toggle}
-      aria-label={locale === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
+      aria-label={`Switch to ${locale === "id" ? "English" : "Indonesian"}`}
     >
-      <span className={locale === "en" ? "lang-active" : ""}>ID</span>
-      <span className="lang-sep" />
-      <span className={locale === "en" ? "" : "lang-active"}>EN</span>
+      <span className="lang-toggle-icon">⇄</span>
+      <span className="lang-toggle-text">{t.langToggle}</span>
     </button>
   );
 }
