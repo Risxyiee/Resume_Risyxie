@@ -1,4 +1,6 @@
 import { PrintButton } from "@/components/portfolio/print-button";
+import { CertificateGallery } from "@/components/portfolio/certificate-gallery";
+import { PhotoGallery } from "@/components/portfolio/photo-gallery";
 
 export default function PortfolioPage() {
   return (
@@ -156,6 +158,30 @@ export default function PortfolioPage() {
                 </tr>
               </tbody>
             </table>
+            <CertificateGallery
+              certificates={[
+                {
+                  src: "/evidence/aquafunded.png",
+                  alt: "Certificate of Achievement — Evaluation Lulus",
+                  firm: "Aquafunded",
+                },
+                {
+                  src: "/evidence/slf.png",
+                  alt: "Resmi Funded Trader — Sure Leverage Funding",
+                  firm: "Sure Leverage Funding (SLF)",
+                },
+                {
+                  src: "/evidence/v-prop-trader.png",
+                  alt: "Lulus Evaluasi — Prop Trader Terverifikasi",
+                  firm: "V Prop Trader",
+                },
+                {
+                  src: "/evidence/pipdance.png",
+                  alt: "Lulus Fase Tantangan → Fase Evaluasi",
+                  firm: "PipDance",
+                },
+              ]}
+            />
           </section>
 
           {/* ===== SKILLS ===== */}
@@ -225,6 +251,19 @@ export default function PortfolioPage() {
                 </div>
               </div>
             </div>
+            <PhotoGallery
+              photos={[
+                {
+                  src: "/evidence/bakso-1.png",
+                  alt: "Produk bakso — foto profesional",
+                },
+                {
+                  src: "/evidence/bakso-2.jpeg",
+                  alt: "Produk bakso — suasana dapur",
+                },
+              ]}
+              label="Bukti Usaha Bakso"
+            />
             <div className="timeline-item">
               <div className="timeline-period">6 bulan</div>
               <div>
