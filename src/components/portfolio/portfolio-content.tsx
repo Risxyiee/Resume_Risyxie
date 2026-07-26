@@ -64,6 +64,9 @@ export function PortfolioContent() {
   const total = PANEL_IDS.length;
 
   /* ── Horizontal scroll logic ──────────────────────────── */
+  const currentRef = useRef(current);
+  currentRef.current = current;
+
   const goTo = useCallback(
     (index: number) => {
       const track = trackRef.current;
@@ -80,15 +83,16 @@ export function PortfolioContent() {
     if (!track) return;
 
     const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) < 8 && Math.abs(e.deltaX) < 8) return;
+      // Only capture vertical wheel — let horizontal trackpad gesture pass through
+      if (Math.abs(e.deltaY) < 10) return;
       e.preventDefault();
       if (lockRef.current) return;
       lockRef.current = true;
-      const dir = e.deltaY + e.deltaX > 0 ? 1 : -1;
-      goTo(current + dir);
+      const dir = e.deltaY > 0 ? 1 : -1;
+      goTo(currentRef.current + dir);
       window.setTimeout(() => {
         lockRef.current = false;
-      }, 650);
+      }, 700);
     };
 
     let touchStartX = 0;
@@ -97,33 +101,34 @@ export function PortfolioContent() {
     };
     const onTouchEnd = (e: TouchEvent) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 50) goTo(currentRef.current + (dx < 0 ? 1 : -1));
     };
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") goTo(current + 1);
-      if (e.key === "ArrowLeft") goTo(current - 1);
+      if (e.key === "ArrowRight") goTo(currentRef.current + 1);
+      if (e.key === "ArrowLeft") goTo(currentRef.current - 1);
     };
 
     const onScroll = () => {
       const idx = Math.round(track.scrollLeft / track.clientWidth);
-      if (idx !== current) setCurrent(idx);
+      setCurrent(idx);
     };
 
-    track.addEventListener("wheel", onWheel, { passive: false });
-    track.addEventListener("touchstart", onTouchStart, { passive: true });
-    track.addEventListener("touchend", onTouchEnd, { passive: true });
+    // Listen wheel on WINDOW so it catches events even over nav/fixed elements
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
     track.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("keydown", onKey);
 
     return () => {
-      track.removeEventListener("wheel", onWheel);
-      track.removeEventListener("touchstart", onTouchStart);
-      track.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
       track.removeEventListener("scroll", onScroll);
       window.removeEventListener("keydown", onKey);
     };
-  }, [current, goTo]);
+  }, [goTo]);
 
   /* ── Feature card spotlight ────────────────────────────── */
   const handleMouseMove = (e: React.MouseEvent) => {

@@ -494,8 +494,7 @@
   height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: auto;
-  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 .h-track::-webkit-scrollbar { display: none; }
 .h-track { -ms-overflow-style: none; scrollbar-width: none; }
@@ -506,7 +505,6 @@
   height: 100vh;
   position: relative;
   flex-shrink: 0;
-  scroll-snap-align: start;
 }
 .h-panel-inner {
   padding: 100px clamp(24px, 5vw, 72px) 80px;
