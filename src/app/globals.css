@@ -2031,6 +2031,23 @@
   display: inline-block;
 }
 
+/* ============================================================
+   PROJECT CARDS GRID
+============================================================ */
+.project-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.project-card-link:hover {
+  color: inherit;
+}
+
 /* Feature bullets (alias for project-grid styling) */
 .feature-bullets {
   display: grid;

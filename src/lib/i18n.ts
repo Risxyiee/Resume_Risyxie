@@ -37,19 +37,34 @@ export const translations = {
       experience: "Pengalaman",
       contact: "Kontak",
     },
-    project: {
-      name: "LuxTrade",
-      url: "luxtradee.web.id",
-      desc: "Trading journal SaaS berbasis AI untuk trader retail Indonesia. Fitur utama: ekstraksi data trade otomatis dari screenshot MT4/MT5 pakai AI vision, sistem achievement & reward, program affiliate, dan dashboard analitik. Dibangun dan dioperasikan sendiri sebagai solo developer — mulai dari arsitektur, keamanan, sampai keputusan harga & go-to-market.",
-      capabilities: [
-        "Mengarahkan AI coding agent untuk membangun & memperbaiki fitur produksi",
-        "Debugging sistematis lewat log server & query database langsung",
-        "Audit & perbaikan keamanan (akses data, autentikasi, environment variable)",
-        "Desain skema database & alur integrasi pembayaran (Midtrans)",
-        "Menyusun struktur harga, promosi, dan program referral",
-        "Membangun & mengelola komunitas pengguna (Discord)",
-      ],
-    },
+    projects: [
+      {
+        name: "LuxTrade",
+        url: "luxtradee.web.id",
+        link: "https://luxtradee.web.id",
+        desc: "Trading journal SaaS berbasis AI untuk trader retail Indonesia. Fitur utama: ekstraksi data trade otomatis dari screenshot MT4/MT5 pakai AI vision, sistem achievement & reward, program affiliate, dan dashboard analitik. Dibangun dan dioperasikan sendiri sebagai solo developer — mulai dari arsitektur, keamanan, sampai keputusan harga & go-to-market.",
+        capabilities: [
+          "Mengarahkan AI coding agent untuk membangun & memperbaiki fitur produksi",
+          "Debugging sistematis lewat log server & query database langsung",
+          "Audit & perbaikan keamanan (akses data, autentikasi, environment variable)",
+          "Desain skema database & alur integrasi pembayaran (Midtrans)",
+          "Menyusun struktur harga, promosi, dan program referral",
+          "Membangun & mengelola komunitas pengguna (Discord)",
+        ],
+      },
+      {
+        name: "Bakso Anak Muda",
+        url: "baksoaanmuda.vercel.app",
+        link: "https://baksoaanmuda.vercel.app/",
+        desc: "Website landing page untuk usaha bakso kecil-kecilan. Dibangun untuk memperkenalkan produk dan meningkatkan kehadiran digital usaha kuliner lokal.",
+        capabilities: [
+          "Desain & development website landing page",
+          "Fotografi produk bakso",
+          "Presentasi visual usaha kuliner",
+          "Kehadiran digital untuk UMKM lokal",
+        ],
+      },
+    ],
     credentials: {
       rows: [
         {
@@ -180,19 +195,34 @@ export const translations = {
       experience: "Experience",
       contact: "Contact",
     },
-    project: {
-      name: "LuxTrade",
-      url: "luxtradee.web.id",
-      desc: "AI-powered trading journal SaaS for Indonesian retail traders. Key features: automatic trade data extraction from MT4/MT5 screenshots via AI vision, achievement & reward system, affiliate program, and analytics dashboard. Built and operated solo as a solo developer — from architecture and security to pricing decisions and go-to-market strategy.",
-      capabilities: [
-        "Directing AI coding agents to build & fix production features",
-        "Systematic debugging via server logs & direct database queries",
-        "Security audit & fixes (data access, auth, environment variables)",
-        "Database schema design & payment integration flow (Midtrans)",
-        "Structuring pricing, promotions, and referral programs",
-        "Building & managing user community (Discord)",
-      ],
-    },
+    projects: [
+      {
+        name: "LuxTrade",
+        url: "luxtradee.web.id",
+        link: "https://luxtradee.web.id",
+        desc: "AI-powered trading journal SaaS for Indonesian retail traders. Key features: automatic trade data extraction from MT4/MT5 screenshots via AI vision, achievement & reward system, affiliate program, and analytics dashboard. Built and operated solo as a solo developer — from architecture and security to pricing decisions and go-to-market strategy.",
+        capabilities: [
+          "Directing AI coding agents to build & fix production features",
+          "Systematic debugging via server logs & direct database queries",
+          "Security audit & fixes (data access, auth, environment variables)",
+          "Database schema design & payment integration flow (Midtrans)",
+          "Structuring pricing, promotions, and referral programs",
+          "Building & managing user community (Discord)",
+        ],
+      },
+      {
+        name: "Bakso Anak Muda",
+        url: "baksoaanmuda.vercel.app",
+        link: "https://baksoaanmuda.vercel.app/",
+        desc: "Landing page website for a small bakso (meatball soup) business. Built to showcase the product and improve the digital presence of a local food business.",
+        capabilities: [
+          "Landing page design & development",
+          "Bakso product photography",
+          "Visual presentation for food business",
+          "Digital presence for local small businesses",
+        ],
+      },
+    ],
     credentials: {
       rows: [
         {

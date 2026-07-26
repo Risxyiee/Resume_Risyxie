@@ -320,37 +320,47 @@ export function PortfolioContent() {
         <section className="h-panel" id="project">
           <div className="h-panel-inner">
             <SectionHead num="02" title={t.sections.project} />
-            <motion.div className="feature-card"
-              onMouseMove={handleMouseMove} ref={cardRef}
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.8, delay: 0.15, ease }}
-            >
-              <motion.h3 className="feature-card-name"
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3, ease }}
-              >{t.project.name}</motion.h3>
-              <motion.div className="feature-url"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.45 }}
-              >{t.project.url}</motion.div>
-              <motion.p className="feature-card-desc"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5, ease }}
-              >{t.project.desc}</motion.p>
-              <Stagger className="feature-bullets" stagger={0.06}>
-                {t.project.capabilities.map((cap) => (
-                  <SItem key={cap}>{cap}</SItem>
-                ))}
-              </Stagger>
-            </motion.div>
+            <div className="project-cards-grid">
+              {t.projects.map((proj, pi) => (
+                <motion.a
+                  key={proj.name}
+                  href={proj.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="feature-card project-card-link"
+                  onMouseMove={pi === 0 ? handleMouseMove : undefined}
+                  ref={pi === 0 ? cardRef : null}
+                  initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.8, delay: 0.15 + pi * 0.12, ease }}
+                >
+                  <motion.h3 className="feature-card-name"
+                    initial={{ opacity: 0, x: -16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 + pi * 0.12, ease }}
+                  >{proj.name}</motion.h3>
+                  <motion.div className="feature-url"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.45 + pi * 0.12 }}
+                  >{proj.url}</motion.div>
+                  <motion.p className="feature-card-desc"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.5 + pi * 0.12, ease }}
+                  >{proj.desc}</motion.p>
+                  <Stagger className="feature-bullets" stagger={0.06}>
+                    {proj.capabilities.map((cap) => (
+                      <SItem key={cap}>{cap}</SItem>
+                    ))}
+                  </Stagger>
+                </motion.a>
+              ))}
+            </div>
           </div>
         </section>
 
