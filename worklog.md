@@ -140,3 +140,38 @@ Stage Summary:
 - ESLint passes with no errors
 - Dev server compiles cleanly (GET / 200 responses)
 
+---
+Task ID: 4
+Agent: Main Agent
+Task: Fix language toggle visibility + add animated snake-like particle lines background
+
+Work Log:
+- Identified two issues: (1) language toggle not visible, (2) background too static
+- Fixed language toggle visibility:
+  - Added `flex-shrink: 0` to `.nav-actions` so it won't be squeezed out by `.nav-links`
+  - Added `flex-shrink: 1; min-width: 0; overflow: hidden` to `.nav-links` so it yields space
+  - Changed toggle button styling: from transparent/dim (`color: var(--ink-dim)`, `border: var(--line)`) to gold-tinted (`color: var(--gold-1)`, `border: var(--gold-2)`, `background: rgba(228,193,115,0.08)`, `box-shadow: 0 0 16px rgba(228,193,115,0.12)`)
+  - Enhanced hover state with brighter glow
+- Created snake particle background animation (`/src/components/portfolio/snake-particles.tsx`):
+  - Perlin noise-based steering for organic, snake-like movement
+  - 14 snake entities with 80-180 segments each, tapering from thin tail to thicker head
+  - Gold color palette (hue 30-48) matching the theme
+  - Multi-octave noise for more natural curves
+  - Head glow effect (radial gradient)
+  - Slow trail fade (rgba(11,10,8,0.045)) for long, flowing trails
+  - Canvas positioned fixed at viewport (100vw x 100vh) with pointer-events: none
+  - DPR-aware rendering (capped at 1.5x for performance)
+- Integrated `<SnakeParticles />` into portfolio-content.tsx before grain overlay
+- Added `.snake-particles-canvas` CSS (position: fixed, z-index: 1, pointer-events: none)
+- Added `.snake-particles-canvas` to print hide rules
+- Fixed React lint error: moved `currentRef.current = current` into useEffect
+- Fixed lint error in snake-particles: moved animate function inside useEffect to avoid self-reference
+
+Stage Summary:
+- Language toggle is now clearly visible with gold-tinted styling and glow effect
+- Background has 14 animated snake-like particle lines that flow organically using Perlin noise
+- Snakes use gold color palette matching the luxury theme, with tapering thickness and head glow
+- Trail fade creates long, flowing lines that look like snakes/worms
+- Verified via browser automation: toggle button visible, language switching works (ID↔EN)
+- VLM screenshot analysis confirms both features working
+- ESLint passes clean, no errors in dev.log

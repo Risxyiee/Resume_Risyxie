@@ -6,6 +6,7 @@ import { PrintButton } from "./print-button";
 import { LanguageToggle } from "./language-toggle";
 import { CertificateGallery } from "./certificate-gallery";
 import { PhotoGallery } from "./photo-gallery";
+import { SnakeParticles } from "./snake-particles";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
 /* ═══════════════════════════════════════════════════════════
@@ -133,7 +134,7 @@ export function PortfolioContent() {
   const cardRef = useRef<HTMLDivElement>(null);
   const total = PANEL_IDS.length;
   const currentRef = useRef(current);
-  currentRef.current = current;
+  useEffect(() => { currentRef.current = current; });
 
   /* ── Horizontal scroll logic ──────────────────────────── */
   const goTo = useCallback((index: number) => {
@@ -202,6 +203,7 @@ export function PortfolioContent() {
 
   return (
     <>
+      <SnakeParticles />
       <div className="grain-overlay" aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />
 
