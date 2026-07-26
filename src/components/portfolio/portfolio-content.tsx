@@ -6,6 +6,7 @@ import { LanguageToggle } from "./language-toggle";
 import { CertificateGallery } from "./certificate-gallery";
 import { PhotoGallery } from "./photo-gallery";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "./animated-section";
+import { PresentationDeck } from "./presentation-deck";
 import { motion } from "framer-motion";
 
 export function PortfolioContent() {
@@ -19,8 +20,9 @@ export function PortfolioContent() {
         <PrintButton label={t.printBtn} />
       </div>
 
+      <PresentationDeck>
+      {/* ===== SLIDE 1 : TITLE + SUMMARY ===== */}
       <div className="portfolio-page" id="resume">
-        {/* ===== TITLE BLOCK ===== */}
         <motion.div
           className="titleblock"
           initial={{ opacity: 0, y: -20 }}
@@ -83,7 +85,12 @@ export function PortfolioContent() {
           <AnimatedSection delay={0.2} style={{ marginTop: 36 }}>
             <p className="summary" dangerouslySetInnerHTML={{ __html: t.summary }} />
           </AnimatedSection>
+        </div>
+      </div>
 
+      {/* ===== SLIDE 2 : FEATURED PROJECT ===== */}
+      <div className="portfolio-page">
+        <div className="portfolio-content">
           {/* ===== FEATURED PROJECT ===== */}
           <AnimatedSection delay={0.1}>
             <div className="section-head">
@@ -104,7 +111,12 @@ export function PortfolioContent() {
               </StaggerContainer>
             </div>
           </AnimatedSection>
+        </div>
+      </div>
 
+      {/* ===== SLIDE 3 : TRADING CREDENTIALS ===== */}
+      <div className="portfolio-page">
+        <div className="portfolio-content">
           {/* ===== TRADING CREDENTIALS ===== */}
           <AnimatedSection delay={0.1}>
             <div className="section-head">
@@ -147,7 +159,12 @@ export function PortfolioContent() {
               evidenceLabel={t.credentials.evidenceLabel}
             />
           </AnimatedSection>
+        </div>
+      </div>
 
+      {/* ===== SLIDE 4 : SKILLS ===== */}
+      <div className="portfolio-page">
+        <div className="portfolio-content">
           {/* ===== SKILLS ===== */}
           <AnimatedSection delay={0.1}>
             <div className="section-head">
@@ -174,7 +191,12 @@ export function PortfolioContent() {
               ))}
             </div>
           </AnimatedSection>
+        </div>
+      </div>
 
+      {/* ===== SLIDE 5 : EXPERIENCE + EDUCATION ===== */}
+      <div className="portfolio-page">
+        <div className="portfolio-content">
           {/* ===== EXPERIENCE ===== */}
           <AnimatedSection delay={0.1}>
             <div className="section-head">
@@ -228,8 +250,12 @@ export function PortfolioContent() {
               </div>
             </div>
           </AnimatedSection>
+        </div>
+      </div>
 
-          {/* ===== FOOTER ===== */}
+      {/* ===== SLIDE 6 : CLOSING / FOOTER ===== */}
+      <div className="portfolio-page">
+        <div className="portfolio-content">
           <AnimatedSection delay={0}>
             <footer className="portfolio-footer">
               <div className="footer-note">{t.footer.left}</div>
@@ -238,6 +264,7 @@ export function PortfolioContent() {
           </AnimatedSection>
         </div>
       </div>
+      </PresentationDeck>
     </>
   );
 }
