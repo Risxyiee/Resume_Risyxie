@@ -252,24 +252,24 @@ export function PortfolioContent() {
             transition={{ duration: 1.6, delay: 0.3, ease: [0.7, 0, 0.2, 1] }}
           />
           <motion.div className="eyebrow"
-            initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease }}
+            initial={{ opacity: 0, x: -24, filter: "blur(3px)" }} animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.7, delay: 0.6, ease }}
           >{t.hero.eyebrow}</motion.div>
           <h1 className="hero-name">
             <motion.span className="hero-line"
-              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8, ease }}
+              initial={{ opacity: 0, y: 50, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 1, delay: 0.8, ease: [0.25, 1, 0.5, 1] }}
               style={{ display: "block" }}
             >Rizqi Akbar</motion.span>
             <motion.span className="hero-line it gold-text"
-              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0, ease }}
+              initial={{ opacity: 0, y: 50, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 1, delay: 1.05, ease: [0.25, 1, 0.5, 1] }}
               style={{ display: "block" }}
             >Pratama</motion.span>
           </h1>
           <motion.p className="hero-role"
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.3, ease }}
+            initial={{ opacity: 0, y: 16, filter: "blur(4px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, delay: 1.4, ease }}
           >
             {roleParts[0]}{roleParts[1] && <br />}{roleParts[1]}
           </motion.p>
@@ -294,8 +294,8 @@ export function PortfolioContent() {
             <SectionHead num="01" title={t.sections.about} />
             <div className="about-grid">
               <SlideLeft delay={0.2}>
-                <p className="about-lead" dangerouslySetInnerHTML={{ __html: t.about.p1 }} />
-                <p className="summary" style={{ marginTop: 24 }} dangerouslySetInnerHTML={{ __html: t.about.p2 }} />
+                <TextReveal delay={0.3} className="about-lead" as="p">{t.about.p1.replace(/<[^>]*>/g, "")}</TextReveal>
+                <div style={{ marginTop: 24 }}><WordStagger text={t.about.p2.replace(/<[^>]*>/g, "")} delay={0.5} className="summary" /></div>
               </SlideLeft>
               <SlideRight delay={0.35}>
                 <div className="fact-list">
@@ -307,7 +307,12 @@ export function PortfolioContent() {
                       transition={{ duration: 0.5, delay: 0.4 + i * 0.08, ease }}
                     >
                       <div className="fact-label">{fact.label}</div>
-                      <div className="fact-value">{fact.value}</div>
+                      <motion.div className="fact-value"
+                        initial={{ opacity: 0, x: 12, filter: "blur(3px)" }}
+                        whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.5 + i * 0.08, ease }}
+                      >{fact.value}</motion.div>
                     </motion.div>
                   ))}
                 </div>
@@ -330,30 +335,26 @@ export function PortfolioContent() {
                   className="feature-card project-card-link"
                   onMouseMove={pi === 0 ? handleMouseMove : undefined}
                   ref={pi === 0 ? cardRef : null}
-                  initial={{ opacity: 0, y: 30, scale: 0.97 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.8, delay: 0.15 + pi * 0.12, ease }}
+                  transition={{ duration: 1, delay: 0.1 + pi * 0.15, ease: [0.25, 1, 0.5, 1] }}
                 >
-                  <motion.h3 className="feature-card-name"
-                    initial={{ opacity: 0, x: -16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 + pi * 0.12, ease }}
-                  >{proj.name}</motion.h3>
+                  <TextReveal delay={0.25 + pi * 0.15} className="feature-card-name">
+                    {proj.name}
+                  </TextReveal>
+                  <GoldLine delay={0.5 + pi * 0.15} />
                   <motion.div className="feature-url"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, y: 8, letterSpacing: "0.3em" }}
+                    whileInView={{ opacity: 1, y: 0, letterSpacing: "0.1em" }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.45 + pi * 0.12 }}
+                    transition={{ duration: 0.6, delay: 0.55 + pi * 0.15, ease }}
                   >{proj.url}</motion.div>
-                  <motion.p className="feature-card-desc"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 + pi * 0.12, ease }}
-                  >{proj.desc}</motion.p>
-                  <Stagger className="feature-bullets" stagger={0.06}>
+                  <div style={{ marginTop: 16 }}>
+                    <WordStagger text={proj.desc} delay={0.6 + pi * 0.15} />
+                  </div>
+                  <GoldLine delay={0.9 + pi * 0.15} style={{ marginTop: 20, marginBottom: 4 }} />
+                  <Stagger className="feature-bullets" stagger={0.07}>
                     {proj.capabilities.map((cap) => (
                       <SItem key={cap}>{cap}</SItem>
                     ))}
@@ -398,10 +399,10 @@ export function PortfolioContent() {
                 <SlideUp key={group.title} delay={0.15 + gi * 0.12}>
                   <div className="ledger-column">
                     <motion.div className="ledger-column-title"
-                      initial={{ opacity: 0, x: -12 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, x: -16, clipPath: "inset(0 100% 0 0)" }}
+                      whileInView={{ opacity: 1, x: 0, clipPath: "inset(0 0% 0 0)" }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.2 + gi * 0.12, ease }}
+                      transition={{ duration: 0.7, delay: 0.2 + gi * 0.12, ease }}
                     >{group.title}</motion.div>
                     <Stagger stagger={0.06}>
                       {group.items.map((item, i) => (
@@ -411,7 +412,7 @@ export function PortfolioContent() {
                             visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease } },
                           }}
                         >
-                          <div className="ledger-skill">{item}</div>
+                      <div className="ledger-skill">{item}</div>
                           <motion.div className="ledger-meter"
                             variants={{
                               hidden: { scaleX: 0 },
@@ -468,7 +469,7 @@ export function PortfolioContent() {
                           transition={{ duration: 0.5, delay: 0.3 }}
                         >baksoaanmuda.vercel.app</motion.a>
                       ) : null}
-                      <div className="timeline-desc">{item.desc}</div>
+                      <div className="timeline-desc"><WordStagger text={item.desc} delay={0.35} /></div>
                     </div>
                   </div>
                   {i === 1 && <PhotoGallery photos={baksoPhotos} />}
@@ -496,22 +497,22 @@ export function PortfolioContent() {
         <section className="h-panel" id="contact">
           <div className="h-panel-inner footer-inner">
             <motion.div className="footer-mark"
-              initial={{ opacity: 0, scale: 0.6 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.4, rotate: -20 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
+              transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
             >06</motion.div>
             <motion.div className="big serif" style={{ marginTop: 24, marginBottom: 8 }}
-              initial={{ opacity: 0, y: 24, clipPath: "inset(0 100% 0 0)" }}
-              whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0% 0 0)" }}
+              initial={{ opacity: 0, y: 28, clipPath: "inset(0 100% 0 0)", filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0% 0 0)", filter: "blur(0px)" }}
               viewport={{ once: true }}
-              transition={{ duration: 0.9, delay: 0.15, ease }}
+              transition={{ duration: 1.1, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
             >{t.footer.big}</motion.div>
             <motion.div className="footer-links"
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.35, ease }}
+              transition={{ duration: 0.7, delay: 0.35, ease }}
             >
               <a href={`mailto:${t.footer.email}`}>{t.footer.email}</a>
               <a href="https://luxtradee.web.id" target="_blank" rel="noopener noreferrer">{t.footer.website}</a>
