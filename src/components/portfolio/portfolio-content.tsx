@@ -158,6 +158,72 @@ function SectionHead({ num, title }: { num: string; title: string }) {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   PROJECT CARD — per-card mouse spotlight
+   ═══════════════════════════════════════════════════════════ */
+function ProjectCard({
+  proj,
+  index,
+  images,
+}: {
+  proj: { name: string; url: string; link: string; desc: string; capabilities: readonly string[] };
+  index: number;
+  images?: string[];
+}) {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    ref.current.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    ref.current.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
+  return (
+    <motion.a
+      href={proj.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="feature-card project-card-link"
+      onMouseMove={handleMouseMove}
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 1, delay: 0.1 + index * 0.15, ease: [0.25, 1, 0.5, 1] }}
+    >
+      {images && images.length > 0 && (
+        <div className="project-card-images">
+          {images.map((src, i) => (
+            <div key={i} className="project-card-image-wrap">
+              <img src={src} alt={proj.name} loading="lazy" />
+            </div>
+          ))}
+        </div>
+      )}
+      <TextReveal delay={0.25 + index * 0.15} className="feature-card-name">
+        {proj.name}
+      </TextReveal>
+      <GoldLine delay={0.5 + index * 0.15} />
+      <motion.div className="feature-url"
+        initial={{ opacity: 0, y: 8, letterSpacing: "0.3em" }}
+        whileInView={{ opacity: 1, y: 0, letterSpacing: "0.1em" }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.55 + index * 0.15, ease }}
+      >{proj.url}</motion.div>
+      <div style={{ marginTop: 16 }}>
+        <WordStagger text={proj.desc} delay={0.6 + index * 0.15} />
+      </div>
+      <GoldLine delay={0.9 + index * 0.15} style={{ marginTop: 20, marginBottom: 4 }} />
+      <Stagger className="feature-bullets" stagger={0.07}>
+        {proj.capabilities.map((cap) => (
+          <SItem key={cap}>{cap}</SItem>
+        ))}
+      </Stagger>
+    </motion.a>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    PANEL CONFIG
    ═══════════════════════════════════════════════════════════ */
 const PANEL_IDS = ["hero", "about", "project", "credentials", "skills", "experience", "contact"] as const;
@@ -171,7 +237,6 @@ export function PortfolioContent() {
   const trackRef = useRef<HTMLDivElement>(null);
   const lockRef = useRef(false);
   const [current, setCurrent] = useState(0);
-  const cardRef = useRef<HTMLDivElement>(null);
   const total = PANEL_IDS.length;
   const currentRef = useRef(current);
   useEffect(() => { currentRef.current = current; });
@@ -215,12 +280,6 @@ export function PortfolioContent() {
     };
   }, [goTo]);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const r = cardRef.current.getBoundingClientRect();
-    cardRef.current.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    cardRef.current.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
   const handleNavClick = (key: PanelKey) => { const idx = PANEL_IDS.indexOf(key); if (idx >= 0) goTo(idx); };
 
   const roleParts = t.hero.role.split("||");
@@ -234,6 +293,10 @@ export function PortfolioContent() {
     { src: "/evidence/bakso-1.png", alt: t.experience.baksoPhotos[0].alt },
     { src: "/evidence/bakso-2.jpeg", alt: t.experience.baksoPhotos[1].alt },
   ];
+  const projectImages: Record<string, string[]> = {
+    [t.projects[0].name]: [],
+    [t.projects[1].name]: ["/evidence/bakso-1.png", "/evidence/bakso-2.jpeg"],
+  };
   const factEntries = [
     { label: t.about.facts.email, value: "riskiakbarp123@gmail.com" },
     { label: t.about.facts.location, value: locale === "id" ? "Kebumen, Jawa Tengah" : "Kebumen, Central Java" },
@@ -367,39 +430,12 @@ export function PortfolioContent() {
             <SectionHead num="02" title={t.sections.project} />
             <div className="project-cards-grid">
               {t.projects.map((proj, pi) => (
-                <motion.a
+                <ProjectCard
                   key={proj.name}
-                  href={proj.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="feature-card project-card-link"
-                  onMouseMove={pi === 0 ? handleMouseMove : undefined}
-                  ref={pi === 0 ? cardRef : null}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 1, delay: 0.1 + pi * 0.15, ease: [0.25, 1, 0.5, 1] }}
-                >
-                  <TextReveal delay={0.25 + pi * 0.15} className="feature-card-name">
-                    {proj.name}
-                  </TextReveal>
-                  <GoldLine delay={0.5 + pi * 0.15} />
-                  <motion.div className="feature-url"
-                    initial={{ opacity: 0, y: 8, letterSpacing: "0.3em" }}
-                    whileInView={{ opacity: 1, y: 0, letterSpacing: "0.1em" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.55 + pi * 0.15, ease }}
-                  >{proj.url}</motion.div>
-                  <div style={{ marginTop: 16 }}>
-                    <WordStagger text={proj.desc} delay={0.6 + pi * 0.15} />
-                  </div>
-                  <GoldLine delay={0.9 + pi * 0.15} style={{ marginTop: 20, marginBottom: 4 }} />
-                  <Stagger className="feature-bullets" stagger={0.07}>
-                    {proj.capabilities.map((cap) => (
-                      <SItem key={cap}>{cap}</SItem>
-                    ))}
-                  </Stagger>
-                </motion.a>
+                  proj={proj}
+                  index={pi}
+                  images={projectImages[proj.name]}
+                />
               ))}
             </div>
           </div>
