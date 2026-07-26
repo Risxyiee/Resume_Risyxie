@@ -1,0 +1,2002 @@
+   132→.grain-overlay {
+   133→  position: fixed;
+   134→  inset: 0;
+   135→  z-index: 50;
+   136→  pointer-events: none;
+   137→  opacity: 0.45;
+   138→  mix-blend-mode: overlay;
+   139→  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.92 0 0 0 0 0.86 0 0 0 0.65 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+   140→  background-size: 160px 160px;
+   141→  animation: grainShift 6s steps(6) infinite;
+   142→}
+   143→@keyframes grainShift {
+   144→  0% { transform: translate(0, 0); }
+   145→  20% { transform: translate(-4%, 3%); }
+   146→  40% { transform: translate(3%, -2%); }
+   147→  60% { transform: translate(-2%, -4%); }
+   148→  80% { transform: translate(4%, 2%); }
+   149→  100% { transform: translate(0, 0); }
+   150→}
+   151→
+   152→/* Faint vignette to deepen the editorial mood */
+   153→.vignette {
+   154→  position: fixed;
+   155→  inset: 0;
+   156→  z-index: 49;
+   157→  pointer-events: none;
+   158→  background: radial-gradient(
+   159→    ellipse at center,
+   160→    transparent 55%,
+   161→    rgba(0, 0, 0, 0.55) 100%
+   162→  );
+   163→}
+   164→
+   165→/* ============================================================
+   166→   FIXED NAV
+   167→============================================================ */
+   168→.site-nav {
+   169→  position: fixed;
+   170→  top: 0;
+   171→  left: 0;
+   172→  right: 0;
+   173→  z-index: 300;
+   174→  display: flex;
+   175→  align-items: center;
+   176→  justify-content: space-between;
+   177→  padding: 16px clamp(20px, 5vw, 56px);
+   178→  background: rgba(11, 10, 8, 0.62);
+   179→  backdrop-filter: blur(14px) saturate(120%);
+   180→  -webkit-backdrop-filter: blur(14px) saturate(120%);
+   181→  border-bottom: 1px solid var(--line-soft);
+   182→  transition: padding 0.3s ease, background 0.3s ease;
+   183→}
+   184→.site-nav.is-scrolled {
+   185→  padding-top: 10px;
+   186→  padding-bottom: 10px;
+   187→  background: rgba(11, 10, 8, 0.85);
+   188→}
+   189→.nav-mark {
+   190→  font-family: var(--font-fraunces), "Fraunces", serif;
+   191→  font-weight: 600;
+   192→  font-size: 18px;
+   193→  letter-spacing: -0.01em;
+   194→  color: var(--ink);
+   195→  display: flex;
+   196→  align-items: center;
+   197→  gap: 10px;
+   198→}
+   199→.nav-mark::before {
+   200→  content: "";
+   201→  width: 8px;
+   202→  height: 8px;
+   203→  background: var(--gold-1);
+   204→  transform: rotate(45deg);
+   205→  display: inline-block;
+   206→  box-shadow: 0 0 12px rgba(228, 193, 115, 0.6);
+   207→}
+   208→.nav-actions {
+   209→  display: flex;
+   210→  align-items: center;
+   211→  gap: 10px;
+   212→  flex-shrink: 0;
+   213→}
+   214→
+   215→/* Language toggle — editorial style */
+   216→.lang-toggle, .lang-toggle-btn {
+   217→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   218→  font-size: 11.5px;
+   219→  letter-spacing: 0.12em;
+   220→  text-transform: uppercase;
+   221→  background: rgba(228, 193, 115, 0.08);
+   222→  border: 1px solid var(--gold-2);
+   223→  color: var(--gold-1);
+   224→  padding: 9px 14px;
+   225→  border-radius: 2px;
+   226→  cursor: pointer;
+   227→  display: inline-flex;
+   228→  align-items: center;
+   229→  gap: 8px;
+   230→  box-shadow: 0 0 16px rgba(228, 193, 115, 0.12);
+   231→  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+   232→}
+   233→.lang-toggle:hover, .lang-toggle-btn:hover {
+   234→  border-color: var(--gold-1);
+   235→  color: var(--ink);
+   236→  background: var(--gold-soft);
+   237→  box-shadow: 0 0 24px rgba(228, 193, 115, 0.3);
+   238→}
+   239→.lang-toggle:active, .lang-toggle-btn:active { transform: scale(0.96); }
+   240→.lang-toggle-icon {
+   241→  font-size: 13px;
+   242→  line-height: 1;
+   243→  color: var(--gold-1);
+   244→}
+   245→.lang-toggle-text { line-height: 1; }
+   246→
+   247→/* Print button — gold on dark */
+   248→.print-btn {
+   249→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   250→  font-size: 11.5px;
+   251→  letter-spacing: 0.12em;
+   252→  text-transform: uppercase;
+   253→  background: var(--gold-1);
+   254→  color: var(--bg);
+   255→  border: 1px solid var(--gold-1);
+   256→  padding: 9px 16px;
+   257→  border-radius: 2px;
+   258→  cursor: pointer;
+   259→  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+   260→  display: inline-flex;
+   261→  align-items: center;
+   262→  gap: 8px;
+   263→}
+   264→.print-btn:hover {
+   265→  background: transparent;
+   266→  color: var(--gold-1);
+   267→  box-shadow: 0 0 24px rgba(228, 193, 115, 0.25);
+   268→}
+   269→.print-btn:active { transform: scale(0.96); }
+   270→
+   271→/* Legacy bar (kept so older layout still renders) */
+   272→.print-bar {
+   273→  max-width: 1180px;
+   274→  margin: 0 auto;
+   275→  padding: 18px clamp(20px, 5vw, 56px) 0 56px;
+   276→  display: flex;
+   277→  justify-content: space-between;
+   278→  align-items: center;
+   279→  gap: 12px;
+   280→  flex-wrap: wrap;
+   281→}
+   282→
+   283→/* ============================================================
+   284→   PAGE SHELL
+   285→============================================================ */
+   286→.portfolio-page {
+   287→  max-width: 1180px;
+   288→  margin: 0 auto;
+   289→  padding: 0 clamp(20px, 5vw, 56px);
+   290→  background: transparent;
+   291→  box-shadow: none;
+   292→}
+   293→.portfolio-content {
+   294→  padding: 0;
+   295→}
+   296→
+   297→/* ============================================================
+   298→   HERO
+   299→============================================================ */
+   300→.hero {
+   301→  position: relative;
+   302→  min-height: 100vh;
+   303→  display: flex;
+   304→  flex-direction: column;
+   305→  justify-content: center;
+   306→  padding: 140px clamp(20px, 5vw, 56px) 90px;
+   307→  max-width: 1180px;
+   308→  margin: 0 auto;
+   309→}
+   310→.hero-eyebrow {
+   311→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   312→  font-size: 11.5px;
+   313→  letter-spacing: 0.32em;
+   314→  text-transform: uppercase;
+   315→  color: var(--gold-1);
+   316→  margin-bottom: 32px;
+   317→  display: inline-flex;
+   318→  align-items: center;
+   319→  gap: 14px;
+   320→}
+   321→.hero-eyebrow::before {
+   322→  content: "";
+   323→  width: 28px;
+   324→  height: 1px;
+   325→  background: var(--gold-1);
+   326→  display: inline-block;
+   327→}
+   328→.hero-name {
+   329→  font-family: var(--font-fraunces), "Fraunces", serif;
+   330→  font-weight: 600;
+   331→  font-size: clamp(48px, 9vw, 124px);
+   332→  line-height: 0.94;
+   333→  letter-spacing: -0.025em;
+   334→  color: var(--ink);
+   335→  margin: 0 0 18px 0;
+   336→}
+   337→.hero-name .gold-text {
+   338→  display: block;
+   339→  font-style: italic;
+   340→  font-weight: 400;
+   341→}
+   342→.hero-role {
+   343→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   344→  font-size: clamp(11px, 1.4vw, 13px);
+   345→  letter-spacing: 0.22em;
+   346→  text-transform: uppercase;
+   347→  color: var(--ink-dim);
+   348→  margin-bottom: 36px;
+   349→}
+   350→.hero-rule {
+   351→  display: block;
+   352→  width: 100%;
+   353→  max-width: 520px;
+   354→  height: 1px;
+   355→  background: linear-gradient(
+   356→    90deg,
+   357→    var(--gold-1) 0%,
+   358→    var(--gold-2) 60%,
+   359→    transparent 100%
+   360→  );
+   361→  transform-origin: left center;
+   362→  animation: drawRule 1.6s cubic-bezier(0.7, 0, 0.2, 1) 0.3s both;
+   363→  margin-bottom: 32px;
+   364→}
+   365→@keyframes drawRule {
+   366→  0% { transform: scaleX(0); opacity: 0; }
+   367→  60% { opacity: 1; }
+   368→  100% { transform: scaleX(1); opacity: 1; }
+   369→}
+   370→.hero-meta {
+   371→  display: flex;
+   372→  flex-wrap: wrap;
+   373→  gap: 28px 48px;
+   374→  margin-top: 8px;
+   375→  max-width: 720px;
+   376→}
+   377→.hero-meta-item {
+   378→  display: flex;
+   379→  flex-direction: column;
+   380→  gap: 4px;
+   381→}
+   382→.hero-meta-label {
+   383→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   384→  font-size: 10px;
+   385→  letter-spacing: 0.18em;
+   386→  text-transform: uppercase;
+   387→  color: var(--ink-faint);
+   388→}
+   389→.hero-meta-value {
+   390→  font-family: var(--font-manrope), "Manrope", sans-serif;
+   391→  font-size: 14.5px;
+   392→  color: var(--ink);
+   393→  font-weight: 500;
+   394→}
+   395→.hero-scroll-cue {
+   396→  position: absolute;
+   397→  bottom: 28px;
+   398→  left: 50%;
+   399→  transform: translateX(-50%);
+   400→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   401→  font-size: 10px;
+   402→  letter-spacing: 0.28em;
+   403→  text-transform: uppercase;
+   404→  color: var(--ink-faint);
+   405→  display: flex;
+   406→  flex-direction: column;
+   407→  align-items: center;
+   408→  gap: 8px;
+   409→}
+   410→.hero-scroll-cue::after {
+   411→  content: "";
+   412→  width: 1px;
+   413→  height: 32px;
+   414→  background: linear-gradient(180deg, var(--gold-1), transparent);
+   415→  animation: scrollPulse 2.2s ease-in-out infinite;
+   416→}
+   417→@keyframes scrollPulse {
+   418→  0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+   419→  50% { transform: scaleY(1); opacity: 1; }
+   420→}
+   421→
+   422→/* Gold gradient text utility */
+   423→.gold-text {
+   424→  background: linear-gradient(
+   425→    100deg,
+   426→    var(--gold-1) 0%,
+   427→    #F4DDA0 35%,
+   428→    var(--gold-2) 70%,
+   429→    var(--gold-1) 100%
+   430→  );
+   431→  background-size: 200% auto;
+   432→  -webkit-background-clip: text;
+   433→  background-clip: text;
+   434→  -webkit-text-fill-color: transparent;
+   435→  color: transparent;
+   436→  animation: goldShimmer 8s linear infinite;
+   437→}
+   438→@keyframes goldShimmer {
+   439→  0% { background-position: 0% center; }
+   440→  100% { background-position: 200% center; }
+   441→}
+   442→
+   443→/* ============================================================
+   444→   SCROLL REVEAL (CSS-driven; Framer Motion is the primary driver)
+   445→============================================================ */
+   446→.reveal {
+   447→  opacity: 0;
+   448→  transform: translateY(28px);
+   449→  transition:
+   450→    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+   451→    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+   452→  will-change: opacity, transform;
+   453→}
+   454→.reveal.in {
+   455→  opacity: 1;
+   456→  transform: translateY(0);
+   457→}
+   458→.reveal-stagger > * {
+   459→  opacity: 0;
+   460→  transform: translateY(18px);
+   461→  transition:
+   462→    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+   463→    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+   464→}
+   465→.reveal-stagger.in > * {
+   466→  opacity: 1;
+   467→  transform: translateY(0);
+   468→}
+   469→.reveal-stagger.in > *:nth-child(1) { transition-delay: 0.04s; }
+   470→.reveal-stagger.in > *:nth-child(2) { transition-delay: 0.10s; }
+   471→.reveal-stagger.in > *:nth-child(3) { transition-delay: 0.16s; }
+   472→.reveal-stagger.in > *:nth-child(4) { transition-delay: 0.22s; }
+   473→.reveal-stagger.in > *:nth-child(5) { transition-delay: 0.28s; }
+   474→.reveal-stagger.in > *:nth-child(6) { transition-delay: 0.34s; }
+   475→.reveal-stagger.in > *:nth-child(7) { transition-delay: 0.40s; }
+   476→.reveal-stagger.in > *:nth-child(8) { transition-delay: 0.46s; }
+   477→
+   478→@media (prefers-reduced-motion: reduce) {
+   479→  .reveal, .reveal-stagger > * {
+   480→    opacity: 1 !important;
+   481→    transform: none !important;
+   482→    transition: none !important;
+   483→  }
+   484→  .hero-rule, .gold-text, .grain-overlay, .hero-scroll-cue::after, .h-progress-fill {
+   485→    animation: none !important;
+   486→  }
+   487→}
+   488→
+   489→/* ============================================================
+   490→   HORIZONTAL SCROLL TRACK
+   491→============================================================ */
+   492→.h-track {
+   493→  display: flex;
+   494→  width: 100vw;
+   495→  min-width: 100vw;
+   496→  max-width: 100vw;
+   497→  height: 100vh;
+   498→  overflow-x: auto;
+   499→  overflow-y: hidden;
+   500→  scroll-behavior: smooth;
+   501→}
+   502→.h-track::-webkit-scrollbar { display: none; }
+   503→.h-track { -ms-overflow-style: none; scrollbar-width: none; }
+   504→
+   505→.h-panel {
+   506→  width: 100vw;
+   507→  min-width: 100vw;
+   508→  height: 100vh;
+   509→  position: relative;
+   510→  flex-shrink: 0;
+   511→}
+   512→.h-panel-inner {
+   513→  padding: 100px clamp(24px, 5vw, 72px) 80px;
+   514→  max-width: 900px;
+   515→  height: 100%;
+   516→  overflow-y: auto;
+   517→  scrollbar-width: thin;
+   518→  scrollbar-color: var(--line) transparent;
+   519→}
+   520→.h-panel-inner::-webkit-scrollbar { width: 4px; }
+   521→.h-panel-inner::-webkit-scrollbar-track { background: transparent; }
+   522→.h-panel-inner::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+   523→
+   524→/* Hero panel */
+   525→.hero-panel {
+   526→  display: flex;
+   527→  flex-direction: column;
+   528→  justify-content: center;
+   529→  padding: 0 clamp(24px, 5vw, 72px);
+   530→}
+   531→
+   532→/* Progress bar — top of viewport */
+   533→.h-progress-rail {
+   534→  position: fixed;
+   535→  top: 0;
+   536→  left: 0;
+   537→  right: 0;
+   538→  height: 2px;
+   539→  z-index: 300;
+   540→  background: rgba(42, 36, 28, 0.5);
+   541→}
+   542→.h-progress-fill {
+   543→  height: 100%;
+   544→  background: linear-gradient(90deg, var(--gold-2), var(--gold-1));
+   545→  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+   546→}
+   547→
+   548→/* Dot navigation — bottom right */
+   549→.h-dots {
+   550→  position: fixed;
+   551→  bottom: 28px;
+   552→  right: 28px;
+   553→  z-index: 250;
+   554→  display: flex;
+   555→  gap: 10px;
+   556→  align-items: center;
+   557→}
+   558→.h-dot {
+   559→  width: 8px;
+   560→  height: 8px;
+   561→  border-radius: 50%;
+   562→  border: 1px solid var(--ink-dim);
+   563→  background: transparent;
+   564→  cursor: pointer;
+   565→  padding: 0;
+   566→  transition: all 0.3s ease;
+   567→}
+   568→.h-dot:hover {
+   569→  border-color: var(--gold-1);
+   570→}
+   571→.h-dot.active {
+   572→  background: var(--gold-1);
+   573→  border-color: var(--gold-1);
+   574→  box-shadow: 0 0 10px rgba(228, 193, 115, 0.4);
+   575→}
+   576→
+   577→/* Nav links — buttons instead of anchors */
+   578→.nav-link {
+   579→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   580→  font-size: 11px;
+   581→  letter-spacing: 0.1em;
+   582→  text-transform: uppercase;
+   583→  color: var(--ink-dim);
+   584→  background: none;
+   585→  border: none;
+   586→  cursor: pointer;
+   587→  padding: 4px 0;
+   588→  position: relative;
+   589→  transition: color 0.25s ease;
+   590→}
+   591→.nav-link::after {
+   592→  content: "";
+   593→  position: absolute;
+   594→  bottom: 0;
+   595→  left: 0;
+   596→  width: 0;
+   597→  height: 1px;
+   598→  background: var(--gold-1);
+   599→  transition: width 0.3s ease;
+   600→}
+   601→.nav-link:hover,
+   602→.nav-link.active {
+   603→  color: var(--gold-1);
+   604→}
+   605→.nav-link.active::after,
+   606→.nav-link:hover::after {
+   607→  width: 100%;
+   608→}
+   609→
+   610→/* Scroll cue — point right */
+   611→.scroll-cue {
+   612→  position: absolute;
+   613→  bottom: 40px;
+   614→  left: clamp(24px, 5vw, 72px);
+   615→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   616→  font-size: 10px;
+   617→  letter-spacing: 0.22em;
+   618→  text-transform: uppercase;
+   619→  color: var(--ink-faint);
+   620→  display: flex;
+   621→  align-items: center;
+   622→  gap: 12px;
+   623→  animation: cuePulse 2s ease-in-out infinite;
+   624→}
+   625→.scroll-cue::after {
+   626→  content: "";
+   627→  width: 32px;
+   628→  height: 1px;
+   629→  background: linear-gradient(90deg, var(--gold-1), transparent);
+   630→  animation: cueMove 1.8s ease-in-out infinite;
+   631→}
+   632→@keyframes cuePulse {
+   633→  0%, 100% { opacity: 0.4; }
+   634→  50% { opacity: 1; }
+   635→}
+   636→@keyframes cueMove {
+   637→  0%, 100% { opacity: 0.3; transform: scaleX(0.5); }
+   638→  50% { opacity: 1; transform: scaleX(1); }
+   639→}
+   640→
+   641→/* Eyebrow + hero tags (used by new hero panel) */
+   642→.eyebrow {
+   643→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   644→  font-size: 11.5px;
+   645→  letter-spacing: 0.28em;
+   646→  text-transform: uppercase;
+   647→  color: var(--gold-1);
+   648→  margin-bottom: 28px;
+   649→  display: flex;
+   650→  align-items: center;
+   651→  gap: 14px;
+   652→}
+   653→.eyebrow::before {
+   654→  content: "";
+   655→  width: 24px;
+   656→  height: 1px;
+   657→  background: var(--gold-1);
+   658→  display: inline-block;
+   659→}
+   660→.hero-tags {
+   661→  margin-top: 32px;
+   662→  display: flex;
+   663→  gap: 12px;
+   664→  flex-wrap: wrap;
+   665→}
+   666→.tag {
+   667→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   668→  font-size: 11px;
+   669→  letter-spacing: 0.06em;
+   670→  padding: 8px 16px;
+   671→  border: 1px solid var(--line);
+   672→  color: var(--ink-dim);
+   673→  border-radius: 100px;
+   674→  transition: border-color 0.25s ease, color 0.25s ease;
+   675→}
+   676→.tag:hover {
+   677→  border-color: var(--gold-2);
+   678→  color: var(--ink);
+   679→}
+   680→
+   681→/* Timeline link (bakso website) */
+   682→.timeline-link {
+   683→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   684→  font-size: 12px;
+   685→  color: var(--gold-1);
+   686→  text-decoration: none;
+   687→  border-bottom: 1px solid var(--gold-2);
+   688→  display: inline-block;
+   689→  margin-top: 6px;
+   690→  margin-bottom: 8px;
+   691→  transition: color 0.2s, border-color 0.2s;
+   692→}
+   693→.timeline-link:hover {
+   694→  color: var(--gold-1);
+   695→  border-color: var(--gold-1);
+   696→}
+   697→
+   698→/* Footer inner — centered vertically */
+   699→.footer-inner {
+   700→  display: flex;
+   701→  flex-direction: column;
+   702→  justify-content: center;
+   703→}
+   704→
+   705→/* About grid — tighter for panel */
+   706→.about-grid {
+   707→  display: grid;
+   708→  grid-template-columns: 1.3fr 0.7fr;
+   709→  gap: 48px;
+   710→  align-items: start;
+   711→}
+   712→.about-lead {
+   713→  color: var(--ink);
+   714→  font-size: 15px;
+   715→  line-height: 1.8;
+   716→}
+   717→.about-lead strong { color: var(--ink); }
+   718→.summary {
+   719→  color: var(--ink-dim);
+   720→  font-size: 14.5px;
+   721→  line-height: 1.75;
+   722→}
+   723→.summary strong { color: var(--ink); }
+   724→.fact-list { border-top: 1px solid var(--line); }
+   725→.fact-row {
+   726→  display: flex;
+   727→  justify-content: space-between;
+   728→  padding: 14px 0;
+   729→  border-bottom: 1px solid var(--line);
+   730→  font-size: 13px;
+   731→}
+   732→.fact-label {
+   733→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   734→  color: var(--ink-dim);
+   735→  text-transform: uppercase;
+   736→  letter-spacing: 0.06em;
+   737→  font-size: 10px;
+   738→}
+   739→.fact-value {
+   740→  text-align: right;
+   741→  color: var(--ink);
+   742→  font-weight: 500;
+   743→}
+   744→
+   745→/* Feature card URL */
+   746→.feature-url {
+   747→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   748→  font-size: 12px;
+   749→  color: var(--gold-1);
+   750→  margin-top: 6px;
+   751→}
+   752→
+   753→/* Footer links */
+   754→.footer-links {
+   755→  display: flex;
+   756→  gap: 28px;
+   757→  flex-wrap: wrap;
+   758→  margin-top: 28px;
+   759→}
+   760→.footer-links a {
+   761→  color: var(--ink);
+   762→  text-decoration: none;
+   763→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   764→  font-size: 13px;
+   765→  border-bottom: 1px solid var(--gold-2);
+   766→  padding-bottom: 3px;
+   767→  transition: color 0.2s, border-color 0.2s;
+   768→}
+   769→.footer-links a:hover {
+   770→  color: var(--gold-1);
+   771→  border-color: var(--gold-1);
+   772→}
+   773→.footer-bottom {
+   774→  width: 100%;
+   775→  display: flex;
+   776→  justify-content: space-between;
+   777→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   778→  font-size: 10px;
+   779→  color: var(--ink-dim);
+   780→  margin-top: 40px;
+   781→  flex-wrap: wrap;
+   782→  gap: 10px;
+   783→}
+   784→
+   785→/* Serif / big utilities */
+   786→.serif { font-family: var(--font-fraunces), "Fraunces", serif; }
+   787→.big {
+   788→  font-family: var(--font-fraunces), "Fraunces", serif;
+   789→  font-style: italic;
+   790→  font-size: clamp(28px, 3.5vw, 44px);
+   791→  line-height: 1.15;
+   792→  color: var(--ink);
+   793→}
+   794→.it { font-style: italic; }
+   795→
+   796→/* ============================================================
+   797→   MOBILE RESPONSIVE — HORIZONTAL
+   798→============================================================ */
+   799→@media (max-width: 820px) {
+   800→  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+   801→  .h-panel-inner { padding: 90px 20px 60px; max-width: none; }
+   802→  .h-dots { bottom: 16px; right: 16px; gap: 7px; }
+   803→  .h-dot { width: 6px; height: 6px; }
+   804→}
+   805→@media (max-width: 720px) {
+   806→  .feature-bullets { grid-template-columns: 1fr !important; }
+   807→  .cred-row { grid-template-columns: 1fr 1fr !important; row-gap: 4px !important; }
+   808→  .cred-row-firm { grid-column: 1 / -1 !important; }
+   809→  .ledger { grid-template-columns: 1fr !important; gap: 28px !important; }
+   810→  .footer-links { flex-direction: column; gap: 12px; }
+   811→}
+   812→
+   813→/* ============================================================
+   814→   PRINT — collapse horizontal back to vertical
+   815→============================================================ */
+   816→@media print {
+   817→  .h-track {
+   818→    display: block !important;
+   819→    height: auto !important;
+   820→    width: auto !important;
+   821→    overflow: visible !important;
+   822→  }
+   823→  .h-panel {
+   824→    width: auto !important;
+   825→    min-width: 0 !important;
+   826→    height: auto !important;
+   827→    page-break-inside: avoid;
+   828→  }
+   829→  .hero-panel {
+   830→    min-height: auto !important;
+   831→    padding: 40px 20px !important;
+   832→  }
+   833→  .h-panel-inner {
+   834→    height: auto !important;
+   835→    overflow: visible !important;
+   836→    max-width: none !important;
+   837→    padding: 0 20px !important;
+   838→  }
+   839→  .h-progress-rail, .h-dots, .scroll-cue { display: none !important; }
+   840→  .site-nav { position: static !important; background: none !important; backdrop-filter: none !important; border: none !important; }
+   841→  .nav-links { display: none !important; }
+   842→  .grain-overlay, .vignette { display: none !important; }
+   843→}
+   844→
+   845→/* ============================================================
+   846→   SECTIONS
+   847→============================================================ */
+   848→.section {
+   849→  padding: clamp(70px, 10vh, 120px) clamp(20px, 5vw, 56px);
+   850→  max-width: 1180px;
+   851→  margin: 0 auto;
+   852→  position: relative;
+   853→}
+   854→.section-head {
+   855→  display: flex;
+   856→  align-items: baseline;
+   857→  gap: 18px;
+   858→  margin-bottom: 48px;
+   859→  flex-wrap: wrap;
+   860→}
+   861→.section-num {
+   862→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   863→  font-size: 11px;
+   864→  letter-spacing: 0.18em;
+   865→  color: var(--gold-1);
+   866→  border: 1px solid var(--gold-2);
+   867→  padding: 3px 8px;
+   868→  border-radius: 2px;
+   869→  background: var(--gold-soft);
+   870→}
+   871→.section-title {
+   872→  font-family: var(--font-fraunces), "Fraunces", serif;
+   873→  font-weight: 600;
+   874→  font-size: clamp(28px, 4.4vw, 44px);
+   875→  letter-spacing: -0.02em;
+   876→  line-height: 1.05;
+   877→  color: var(--ink);
+   878→  text-transform: none;
+   879→}
+   880→.section-title em {
+   881→  font-style: italic;
+   882→  font-weight: 400;
+   883→  color: var(--gold-1);
+   884→}
+   885→.section-kicker {
+   886→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   887→  font-size: 11px;
+   888→  letter-spacing: 0.22em;
+   889→  text-transform: uppercase;
+   890→  color: var(--ink-dim);
+   891→  margin-top: 6px;
+   892→}
+   893→.section-rule {
+   894→  flex: 1;
+   895→  height: 1px;
+   896→  min-width: 40px;
+   897→  background: repeating-linear-gradient(
+   898→    90deg,
+   899→    var(--line) 0,
+   900→    var(--line) 4px,
+   901→    transparent 4px,
+   902→    transparent 9px
+   903→  );
+   904→  align-self: center;
+   905→  opacity: 0.7;
+   906→}
+   907→
+   908→/* Legacy titleblock (kept compatible, restyled) */
+   909→.titleblock {
+   910→  border: 1px solid var(--line);
+   911→  background: var(--bg-panel);
+   912→  margin: 0;
+   913→}
+   914→.titleblock-top {
+   915→  display: flex;
+   916→  justify-content: space-between;
+   917→  align-items: flex-end;
+   918→  padding: 30px 32px 22px 32px;
+   919→  border-bottom: 1px solid var(--line);
+   920→  flex-wrap: wrap;
+   921→  gap: 14px;
+   922→}
+   923→.titleblock-name {
+   924→  font-family: var(--font-fraunces), "Fraunces", serif;
+   925→  font-weight: 600;
+   926→  font-size: clamp(32px, 5vw, 48px);
+   927→  letter-spacing: -0.02em;
+   928→  line-height: 1;
+   929→  color: var(--ink);
+   930→}
+   931→.titleblock-role {
+   932→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   933→  font-size: 12px;
+   934→  letter-spacing: 0.18em;
+   935→  text-transform: uppercase;
+   936→  color: var(--gold-1);
+   937→  margin-top: 10px;
+   938→}
+   939→.titleblock-mark {
+   940→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   941→  font-size: 11px;
+   942→  color: var(--ink-dim);
+   943→  text-align: right;
+   944→  line-height: 1.6;
+   945→  letter-spacing: 0.08em;
+   946→}
+   947→.titleblock-fields {
+   948→  display: grid;
+   949→  grid-template-columns: repeat(4, 1fr);
+   950→}
+   951→.field {
+   952→  padding: 14px 20px;
+   953→  border-right: 1px solid var(--line);
+   954→  transition: background 0.25s ease;
+   955→}
+   956→.field:last-child { border-right: none; }
+   957→.field:hover { background: var(--gold-soft); }
+   958→.field-label {
+   959→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   960→  font-size: 9.5px;
+   961→  letter-spacing: 0.16em;
+   962→  text-transform: uppercase;
+   963→  color: var(--ink-faint);
+   964→  margin-bottom: 6px;
+   965→}
+   966→.field-value {
+   967→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+   968→  font-size: 12.5px;
+   969→  color: var(--ink);
+   970→  word-break: break-word;
+   971→}
+   972→
+   973→/* ============================================================
+   974→   ABOUT GRID
+   975→============================================================ */
+   976→.about-grid {
+   977→  display: grid;
+   978→  grid-template-columns: 1.4fr 1fr;
+   979→  gap: clamp(32px, 6vw, 88px);
+   980→  align-items: start;
+   981→}
+   982→.about-lead {
+   983→  font-family: var(--font-fraunces), "Fraunces", serif;
+   984→  font-weight: 400;
+   985→  font-size: clamp(20px, 2.4vw, 28px);
+   986→  line-height: 1.45;
+   987→  letter-spacing: -0.01em;
+   988→  color: var(--ink);
+   989→}
+   990→.about-lead strong {
+   991→  font-weight: 600;
+   992→  color: var(--gold-1);
+   993→}
+   994→.summary {
+   995→  font-family: var(--font-manrope), "Manrope", sans-serif;
+   996→  font-size: 16.5px;
+   997→  line-height: 1.8;
+   998→  color: var(--ink-dim);
+   999→  max-width: 68ch;
+  1000→}
+  1001→.summary strong {
+  1002→  color: var(--ink);
+  1003→  font-weight: 600;
+  1004→}
+  1005→.about-aside {
+  1006→  border-left: 1px solid var(--line);
+  1007→  padding-left: 28px;
+  1008→  display: flex;
+  1009→  flex-direction: column;
+  1010→  gap: 24px;
+  1011→}
+  1012→.about-aside-block {
+  1013→  display: flex;
+  1014→  flex-direction: column;
+  1015→  gap: 6px;
+  1016→}
+  1017→.about-aside-label {
+  1018→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1019→  font-size: 10px;
+  1020→  letter-spacing: 0.2em;
+  1021→  text-transform: uppercase;
+  1022→  color: var(--gold-1);
+  1023→}
+  1024→.about-aside-value {
+  1025→  font-family: var(--font-fraunces), "Fraunces", serif;
+  1026→  font-size: 18px;
+  1027→  color: var(--ink);
+  1028→  line-height: 1.35;
+  1029→}
+  1030→
+  1031→/* ============================================================
+  1032→   FEATURE CARD (with cursor spotlight)
+  1033→============================================================ */
+  1034→.feature-card {
+  1035→  position: relative;
+  1036→  background: var(--bg-panel);
+  1037→  border: 1px solid var(--line);
+  1038→  padding: clamp(28px, 4vw, 44px);
+  1039→  overflow: hidden;
+  1040→  transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+  1041→  --mx: 50%;
+  1042→  --my: 50%;
+  1043→}
+  1044→.feature-card::before {
+  1045→  content: "";
+  1046→  position: absolute;
+  1047→  inset: 0;
+  1048→  background: radial-gradient(
+  1049→    420px circle at var(--mx) var(--my),
+  1050→    rgba(228, 193, 115, 0.14),
+  1051→    transparent 65%
+  1052→  );
+  1053→  opacity: 0;
+  1054→  transition: opacity 0.4s ease;
+  1055→  pointer-events: none;
+  1056→  z-index: 0;
+  1057→}
+  1058→.feature-card::after {
+  1059→  content: "";
+  1060→  position: absolute;
+  1061→  top: 0;
+  1062→  left: 0;
+  1063→  width: 3px;
+  1064→  height: 100%;
+  1065→  background: linear-gradient(180deg, var(--gold-1), var(--gold-2));
+  1066→  transform: scaleY(0);
+  1067→  transform-origin: top;
+  1068→  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  1069→  z-index: 1;
+  1070→}
+  1071→.feature-card:hover {
+  1072→  border-color: rgba(228, 193, 115, 0.35);
+  1073→  transform: translateY(-3px);
+  1074→  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.7);
+  1075→}
+  1076→.feature-card:hover::before { opacity: 1; }
+  1077→.feature-card:hover::after { transform: scaleY(1); }
+  1078→.feature-card > * { position: relative; z-index: 2; }
+  1079→.feature-card-top {
+  1080→  display: flex;
+  1081→  justify-content: space-between;
+  1082→  align-items: flex-start;
+  1083→  gap: 14px;
+  1084→  flex-wrap: wrap;
+  1085→  margin-bottom: 18px;
+  1086→}
+  1087→.feature-card-name {
+  1088→  font-family: var(--font-fraunces), "Fraunces", serif;
+  1089→  font-weight: 600;
+  1090→  font-size: clamp(26px, 3.4vw, 36px);
+  1091→  letter-spacing: -0.02em;
+  1092→  color: var(--ink);
+  1093→  line-height: 1.1;
+  1094→}
+  1095→.feature-card-tag {
+  1096→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1097→  font-size: 11px;
+  1098→  letter-spacing: 0.1em;
+  1099→  text-transform: uppercase;
+  1100→  background: var(--gold-soft);
+  1101→  color: var(--gold-1);
+  1102→  border: 1px solid rgba(228, 193, 115, 0.3);
+  1103→  padding: 5px 11px;
+  1104→  border-radius: 2px;
+  1105→  white-space: nowrap;
+  1106→}
+  1107→.feature-card-desc {
+  1108→  font-size: 15.5px;
+  1109→  line-height: 1.75;
+  1110→  color: var(--ink-dim);
+  1111→  margin-bottom: 28px;
+  1112→  max-width: 70ch;
+  1113→}
+  1114→
+  1115→/* Capability list inside feature card */
+  1116→.project-grid {
+  1117→  display: grid;
+  1118→  grid-template-columns: repeat(2, 1fr);
+  1119→  gap: 4px 32px;
+  1120→}
+  1121→.capability {
+  1122→  display: flex;
+  1123→  gap: 12px;
+  1124→  align-items: flex-start;
+  1125→  font-family: var(--font-manrope), "Manrope", sans-serif;
+  1126→  font-size: 13.5px;
+  1127→  line-height: 1.55;
+  1128→  color: var(--ink-dim);
+  1129→  padding: 10px 0;
+  1130→  border-bottom: 1px solid var(--line-soft);
+  1131→  transition: color 0.25s ease, padding-left 0.25s ease, border-color 0.25s ease;
+  1132→}
+  1133→.capability::before {
+  1134→  content: "";
+  1135→  width: 6px;
+  1136→  height: 6px;
+  1137→  margin-top: 7px;
+  1138→  background: var(--gold-2);
+  1139→  flex-shrink: 0;
+  1140→  border-radius: 1px;
+  1141→  transform: rotate(45deg);
+  1142→  transition: background 0.25s ease, transform 0.25s ease;
+  1143→}
+  1144→.capability:hover {
+  1145→  color: var(--ink);
+  1146→  border-color: var(--gold-2);
+  1147→  padding-left: 6px;
+  1148→}
+  1149→.capability:hover::before {
+  1150→  background: var(--gold-1);
+  1151→  transform: rotate(45deg) scale(1.4);
+  1152→  box-shadow: 0 0 10px rgba(228, 193, 115, 0.5);
+  1153→}
+  1154→
+  1155→/* Legacy project alias (kept compatible, themed) */
+  1156→.project {
+  1157→  position: relative;
+  1158→  background: var(--bg-panel);
+  1159→  border: 1px solid var(--line);
+  1160→  padding: clamp(28px, 4vw, 44px);
+  1161→  overflow: hidden;
+  1162→  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  1163→  --mx: 50%;
+  1164→  --my: 50%;
+  1165→}
+  1166→.project::before {
+  1167→  content: "";
+  1168→  position: absolute;
+  1169→  inset: 0;
+  1170→  background: radial-gradient(
+  1171→    420px circle at var(--mx) var(--my),
+  1172→    rgba(228, 193, 115, 0.12),
+  1173→    transparent 65%
+  1174→  );
+  1175→  opacity: 0;
+  1176→  transition: opacity 0.4s ease;
+  1177→  pointer-events: none;
+  1178→}
+  1179→.project:hover {
+  1180→  border-color: rgba(228, 193, 115, 0.35);
+  1181→  transform: translateY(-3px);
+  1182→  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.7);
+  1183→}
+  1184→.project:hover::before { opacity: 1; }
+  1185→.project > * { position: relative; z-index: 1; }
+  1186→.project-top {
+  1187→  display: flex;
+  1188→  justify-content: space-between;
+  1189→  align-items: flex-start;
+  1190→  flex-wrap: wrap;
+  1191→  gap: 10px;
+  1192→  margin-bottom: 16px;
+  1193→}
+  1194→.project-name {
+  1195→  font-family: var(--font-fraunces), "Fraunces", serif;
+  1196→  font-weight: 600;
+  1197→  font-size: clamp(24px, 3vw, 32px);
+  1198→  letter-spacing: -0.02em;
+  1199→  color: var(--ink);
+  1200→}
+  1201→.project-tag {
+  1202→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1203→  font-size: 11px;
+  1204→  letter-spacing: 0.1em;
+  1205→  text-transform: uppercase;
+  1206→  background: var(--gold-soft);
+  1207→  color: var(--gold-1);
+  1208→  border: 1px solid rgba(228, 193, 115, 0.3);
+  1209→  padding: 5px 11px;
+  1210→  border-radius: 2px;
+  1211→  white-space: nowrap;
+  1212→}
+  1213→.project-desc {
+  1214→  font-size: 15px;
+  1215→  line-height: 1.75;
+  1216→  color: var(--ink-dim);
+  1217→  margin-bottom: 24px;
+  1218→  max-width: 70ch;
+  1219→}
+  1220→
+  1221→/* ============================================================
+  1222→   CREDENTIALS LIST (not a table)
+  1223→============================================================ */
+  1224→.credentials-list {
+  1225→  list-style: none;
+  1226→  margin: 0;
+  1227→  padding: 0;
+  1228→  border-top: 1px solid var(--line);
+  1229→}
+  1230→.credential-row {
+  1231→  display: grid;
+  1232→  grid-template-columns: 1.4fr 2fr 0.8fr 0.8fr;
+  1233→  gap: 24px;
+  1234→  padding: 22px 4px;
+  1235→  border-bottom: 1px solid var(--line);
+  1236→  position: relative;
+  1237→  transition: background 0.3s ease, padding-left 0.3s ease;
+  1238→  align-items: baseline;
+  1239→}
+  1240→.credential-row::before {
+  1241→  content: "";
+  1242→  position: absolute;
+  1243→  left: 0;
+  1244→  top: 0;
+  1245→  bottom: 0;
+  1246→  width: 2px;
+  1247→  background: var(--gold-1);
+  1248→  transform: scaleY(0);
+  1249→  transform-origin: top;
+  1250→  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  1251→}
+  1252→.credential-row:hover {
+  1253→  background: rgba(228, 193, 115, 0.04);
+  1254→  padding-left: 18px;
+  1255→}
+  1256→.credential-row:hover::before { transform: scaleY(1); }
+  1257→.cred-firm {
+  1258→  font-family: var(--font-fraunces), "Fraunces", serif;
+  1259→  font-weight: 600;
+  1260→  font-size: 19px;
+  1261→  letter-spacing: -0.01em;
+  1262→  color: var(--ink);
+  1263→  line-height: 1.2;
+  1264→}
+  1265→.cred-status {
+  1266→  font-family: var(--font-manrope), "Manrope", sans-serif;
+  1267→  font-size: 14px;
+  1268→  color: var(--ink-dim);
+  1269→  line-height: 1.45;
+  1270→}
+  1271→.cred-amount {
+  1272→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1273→  font-size: 13.5px;
+  1274→  font-weight: 500;
+  1275→  color: var(--gold-1);
+  1276→  text-align: right;
+  1277→}
+  1278→.cred-date {
+  1279→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1280→  font-size: 12px;
+  1281→  letter-spacing: 0.06em;
+  1282→  color: var(--ink-faint);
+  1283→  text-align: right;
+  1284→  text-transform: uppercase;
+  1285→}
+  1286→
+  1287→/* Legacy cred-table (kept compatible — hidden visually but data still readable) */
+  1288→.cred-table {
+  1289→  width: 100%;
+  1290→  border-collapse: collapse;
+  1291→  font-size: 13.5px;
+  1292→}
+  1293→.cred-table th {
+  1294→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1295→  font-size: 10.5px;
+  1296→  letter-spacing: 0.1em;
+  1297→  text-transform: uppercase;
+  1298→  color: var(--ink-faint);
+  1299→  text-align: left;
+  1300→  padding: 12px 12px;
+  1301→  border-bottom: 1px solid var(--line);
+  1302→}
+  1303→.cred-table tbody tr {
+  1304→  transition: background 0.25s ease;
+  1305→  border-bottom: 1px solid var(--line-soft);
+  1306→}
+  1307→.cred-table tbody tr:hover { background: rgba(228, 193, 115, 0.05); }
+  1308→.cred-table td {
+  1309→  padding: 16px 12px;
+  1310→  vertical-align: top;
+  1311→}
+  1312→.cred-table .cred-firm { color: var(--ink); }
+  1313→.cred-table .cred-status { color: var(--ink-dim); }
+  1314→.cred-table .cred-amount { color: var(--gold-1); }
+  1315→
+  1316→/* ============================================================
+  1317→   FRAME GALLERY (certificates framed as luxury art)
+  1318→============================================================ */
+  1319→.frame-gallery {
+  1320→  display: grid;
+  1321→  grid-template-columns: repeat(2, 1fr);
+  1322→  gap: 22px;
+  1323→  margin-top: 8px;
+  1324→}
+  1325→.frame {
+  1326→  position: relative;
+  1327→  display: block;
+  1328→  padding: 14px;
+  1329→  background: linear-gradient(160deg, #1F1A14 0%, #14110D 100%);
+  1330→  border: 1px solid var(--line);
+  1331→  cursor: pointer;
+  1332→  text-align: left;
+  1333→  overflow: hidden;
+  1334→  transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+  1335→}
+  1336→.frame::before {
+  1337→  content: "";
+  1338→  position: absolute;
+  1339→  inset: 6px;
+  1340→  border: 1px solid rgba(228, 193, 115, 0.18);
+  1341→  pointer-events: none;
+  1342→  transition: border-color 0.4s ease;
+  1343→}
+  1344→.frame::after {
+  1345→  content: "";
+  1346→  position: absolute;
+  1347→  top: -50%;
+  1348→  left: -50%;
+  1349→  width: 200%;
+  1350→  height: 200%;
+  1351→  background: linear-gradient(
+  1352→    115deg,
+  1353→    transparent 35%,
+  1354→    rgba(228, 193, 115, 0.18) 50%,
+  1355→    transparent 65%
+  1356→  );
+  1357→  transform: translateX(-30%);
+  1358→  transition: transform 0.9s ease;
+  1359→  pointer-events: none;
+  1360→}
+  1361→.frame:hover {
+  1362→  border-color: var(--gold-1);
+  1363→  transform: translateY(-4px);
+  1364→  box-shadow: 0 28px 60px -28px rgba(0, 0, 0, 0.85);
+  1365→}
+  1366→.frame:hover::before { border-color: rgba(228, 193, 115, 0.55); }
+  1367→.frame:hover::after { transform: translateX(30%); }
+  1368→.frame img {
+  1369→  width: 100%;
+  1370→  height: auto;
+  1371→  display: block;
+  1372→  border-radius: 1px;
+  1373→  position: relative;
+  1374→  z-index: 1;
+  1375→}
+  1376→.frame-label {
+  1377→  display: flex;
+  1378→  align-items: center;
+  1379→  justify-content: space-between;
+  1380→  gap: 10px;
+  1381→  margin-top: 12px;
+  1382→  padding: 0 4px;
+  1383→  position: relative;
+  1384→  z-index: 1;
+  1385→}
+  1386→.frame-name {
+  1387→  font-family: var(--font-fraunces), "Fraunces", serif;
+  1388→  font-weight: 600;
+  1389→  font-size: 14px;
+  1390→  color: var(--ink);
+  1391→  letter-spacing: -0.01em;
+  1392→}
+  1393→.frame-tag {
+  1394→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1395→  font-size: 9.5px;
+  1396→  letter-spacing: 0.14em;
+  1397→  text-transform: uppercase;
+  1398→  color: var(--gold-1);
+  1399→}
+  1400→
+  1401→/* Legacy cert-grid (kept compatible, themed) */
+  1402→.cert-grid {
+  1403→  display: grid;
+  1404→  grid-template-columns: repeat(2, 1fr);
+  1405→  gap: 18px;
+  1406→}
+  1407→.cert-thumb {
+  1408→  position: relative;
+  1409→  display: block;
+  1410→  padding: 12px;
+  1411→  background: var(--bg-panel);
+  1412→  border: 1px solid var(--line);
+  1413→  cursor: pointer;
+  1414→  text-align: left;
+  1415→  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  1416→  overflow: hidden;
+  1417→}
+  1418→.cert-thumb::before {
+  1419→  content: "";
+  1420→  position: absolute;
+  1421→  inset: 5px;
+  1422→  border: 1px solid rgba(228, 193, 115, 0.15);
+  1423→  pointer-events: none;
+  1424→  transition: border-color 0.4s ease;
+  1425→}
+  1426→.cert-thumb:hover {
+  1427→  border-color: var(--gold-1);
+  1428→  transform: translateY(-3px);
+  1429→  box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.85);
+  1430→}
+  1431→.cert-thumb:hover::before { border-color: rgba(228, 193, 115, 0.5); }
+  1432→.cert-thumb img {
+  1433→  width: 100%;
+  1434→  height: auto;
+  1435→  display: block;
+  1436→  position: relative;
+  1437→  z-index: 1;
+  1438→}
+  1439→.cert-thumb-label {
+  1440→  display: block;
+  1441→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1442→  font-size: 10px;
+  1443→  letter-spacing: 0.12em;
+  1444→  text-transform: uppercase;
+  1445→  color: var(--ink-dim);
+  1446→  margin-top: 10px;
+  1447→  position: relative;
+  1448→  z-index: 1;
+  1449→  transition: color 0.25s ease;
+  1450→}
+  1451→.cert-thumb:hover .cert-thumb-label { color: var(--gold-1); }
+  1452→
+  1453→/* Photo grid (kept compatible, themed) */
+  1454→.photo-grid {
+  1455→  display: grid;
+  1456→  grid-template-columns: repeat(2, 1fr);
+  1457→  gap: 18px;
+  1458→}
+  1459→.photo-thumb {
+  1460→  position: relative;
+  1461→  display: block;
+  1462→  border: 1px solid var(--line);
+  1463→  overflow: hidden;
+  1464→  cursor: pointer;
+  1465→  background: var(--bg-panel);
+  1466→  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  1467→}
+  1468→.photo-thumb::after {
+  1469→  content: "";
+  1470→  position: absolute;
+  1471→  inset: 0;
+  1472→  background: linear-gradient(180deg, transparent 60%, rgba(11, 10, 8, 0.55) 100%);
+  1473→  pointer-events: none;
+  1474→  opacity: 0.7;
+  1475→  transition: opacity 0.4s ease;
+  1476→}
+  1477→.photo-thumb:hover {
+  1478→  border-color: var(--gold-1);
+  1479→  transform: translateY(-3px);
+  1480→  box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.85);
+  1481→}
+  1482→.photo-thumb:hover::after { opacity: 0.3; }
+  1483→.photo-thumb img {
+  1484→  width: 100%;
+  1485→  height: 220px;
+  1486→  object-fit: cover;
+  1487→  display: block;
+  1488→  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  1489→  filter: saturate(0.9) brightness(0.92);
+  1490→}
+  1491→.photo-thumb:hover img {
+  1492→  transform: scale(1.06);
+  1493→  filter: saturate(1) brightness(1);
+  1494→}
+  1495→
+  1496→/* Evidence label */
+  1497→.evidence-label {
+  1498→  display: flex;
+  1499→  align-items: center;
+  1500→  gap: 14px;
+  1501→  margin: 36px 0 18px 0;
+  1502→}
+  1503→.evidence-label-text {
+  1504→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1505→  font-size: 10.5px;
+  1506→  letter-spacing: 0.22em;
+  1507→  text-transform: uppercase;
+  1508→  color: var(--gold-1);
+  1509→  white-space: nowrap;
+  1510→}
+  1511→.evidence-label-line {
+  1512→  flex: 1;
+  1513→  height: 1px;
+  1514→  background: linear-gradient(
+  1515→    90deg,
+  1516→    var(--gold-2) 0%,
+  1517→    var(--line) 100%
+  1518→  );
+  1519→  opacity: 0.6;
+  1520→}
+  1521→
+  1522→/* ============================================================
+  1523→   LEDGER (skills — accounting book style)
+  1524→============================================================ */
+  1525→.ledger {
+  1526→  display: grid;
+  1527→  grid-template-columns: repeat(2, 1fr);
+  1528→  gap: 0;
+  1529→  border-top: 1px solid var(--line);
+  1530→  border-bottom: 1px solid var(--line);
+  1531→}
+  1532→.ledger-column {
+  1533→  padding: 32px clamp(20px, 3vw, 40px);
+  1534→  border-right: 1px solid var(--line);
+  1535→}
+  1536→.ledger-column:last-child { border-right: none; }
+  1537→.ledger-column-title {
+  1538→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1539→  font-size: 11px;
+  1540→  letter-spacing: 0.22em;
+  1541→  text-transform: uppercase;
+  1542→  color: var(--gold-1);
+  1543→  margin-bottom: 24px;
+  1544→  display: flex;
+  1545→  align-items: center;
+  1546→  gap: 10px;
+  1547→}
+  1548→.ledger-column-title::before {
+  1549→  content: "";
+  1550→  width: 8px;
+  1551→  height: 8px;
+  1552→  border: 1px solid var(--gold-1);
+  1553→  transform: rotate(45deg);
+  1554→  display: inline-block;
+  1555→}
+  1556→.ledger-item {
+  1557→  display: grid;
+  1558→  grid-template-columns: 1fr auto;
+  1559→  gap: 14px;
+  1560→  align-items: center;
+  1561→  padding: 14px 0;
+  1562→  border-bottom: 1px dashed var(--line);
+  1563→  transition: padding-left 0.25s ease, background 0.25s ease;
+  1564→}
+  1565→.ledger-item:last-child { border-bottom: none; }
+  1566→.ledger-item:hover {
+  1567→  padding-left: 8px;
+  1568→  background: rgba(228, 193, 115, 0.04);
+  1569→}
+  1570→.ledger-skill {
+  1571→  font-family: var(--font-manrope), "Manrope", sans-serif;
+  1572→  font-size: 14.5px;
+  1573→  color: var(--ink);
+  1574→  font-weight: 500;
+  1575→  line-height: 1.35;
+  1576→}
+  1577→.ledger-meter {
+  1578→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1579→  font-size: 11px;
+  1580→  letter-spacing: 0.1em;
+  1581→  color: var(--gold-1);
+  1582→  display: flex;
+  1583→  align-items: center;
+  1584→  gap: 8px;
+  1585→}
+  1586→.ledger-meter::before {
+  1587→  content: "";
+  1588→  width: 28px;
+  1589→  height: 1px;
+  1590→  background: var(--gold-2);
+  1591→}
+  1592→
+  1593→/* Legacy skills-grid (kept compatible, themed) */
+  1594→.skills-grid {
+  1595→  display: grid;
+  1596→  grid-template-columns: repeat(2, 1fr);
+  1597→  gap: 28px;
+  1598→}
+  1599→.skill-group-title {
+  1600→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1601→  font-size: 11px;
+  1602→  letter-spacing: 0.2em;
+  1603→  text-transform: uppercase;
+  1604→  color: var(--gold-1);
+  1605→  margin-bottom: 14px;
+  1606→  padding-bottom: 12px;
+  1607→  border-bottom: 1px solid var(--line);
+  1608→}
+  1609→.skill-item {
+  1610→  font-family: var(--font-manrope), "Manrope", sans-serif;
+  1611→  font-size: 14px;
+  1612→  line-height: 1.55;
+  1613→  color: var(--ink-dim);
+  1614→  display: flex;
+  1615→  align-items: center;
+  1616→  gap: 12px;
+  1617→  padding: 6px 0;
+  1618→  transition: color 0.25s ease, padding-left 0.25s ease;
+  1619→}
+  1620→.skill-item:hover {
+  1621→  color: var(--ink);
+  1622→  padding-left: 6px;
+  1623→}
+  1624→.skill-bar-wrap {
+  1625→  width: 100%;
+  1626→  height: 3px;
+  1627→  background: var(--line);
+  1628→  margin-top: 6px;
+  1629→  margin-bottom: 10px;
+  1630→  overflow: hidden;
+  1631→  border-radius: 1px;
+  1632→}
+  1633→.skill-bar {
+  1634→  height: 100%;
+  1635→  background: linear-gradient(90deg, var(--gold-1) 0%, var(--gold-2) 100%);
+  1636→  border-radius: 1px;
+  1637→  transform-origin: left;
+  1638→  box-shadow: 0 0 8px rgba(228, 193, 115, 0.4);
+  1639→}
+  1640→
+  1641→/* ============================================================
+  1642→   TIMELINE
+  1643→============================================================ */
+  1644→.timeline {
+  1645→  position: relative;
+  1646→  padding-left: 0;
+  1647→}
+  1648→.timeline-line {
+  1649→  position: absolute;
+  1650→  left: 132px;
+  1651→  top: 8px;
+  1652→  bottom: 8px;
+  1653→  width: 1px;
+  1654→  background: linear-gradient(
+  1655→    180deg,
+  1656→    transparent 0%,
+  1657→    var(--gold-2) 12%,
+  1658→    var(--gold-1) 50%,
+  1659→    var(--gold-2) 88%,
+  1660→    transparent 100%
+  1661→  );
+  1662→}
+  1663→.timeline-item {
+  1664→  display: grid;
+  1665→  grid-template-columns: 132px 1fr;
+  1666→  gap: 24px;
+  1667→  padding: 22px 0;
+  1668→  position: relative;
+  1669→  transition: background 0.3s ease;
+  1670→}
+  1671→.timeline-item::before {
+  1672→  content: "";
+  1673→  position: absolute;
+  1674→  left: 132px;
+  1675→  top: 32px;
+  1676→  width: 9px;
+  1677→  height: 9px;
+  1678→  border-radius: 50%;
+  1679→  background: var(--bg);
+  1680→  border: 1px solid var(--gold-1);
+  1681→  transform: translateX(-4.5px);
+  1682→  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  1683→  z-index: 1;
+  1684→}
+  1685→.timeline-item:hover::before {
+  1686→  background: var(--gold-1);
+  1687→  transform: translateX(-4.5px) scale(1.4);
+  1688→  box-shadow: 0 0 14px rgba(228, 193, 115, 0.7);
+  1689→}
+  1690→.timeline-item:hover {
+  1691→  background: rgba(228, 193, 115, 0.03);
+  1692→}
+  1693→.timeline-period {
+  1694→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1695→  font-size: 11px;
+  1696→  letter-spacing: 0.16em;
+  1697→  text-transform: uppercase;
+  1698→  color: var(--gold-1);
+  1699→  padding-top: 4px;
+  1700→  text-align: right;
+  1701→  padding-right: 12px;
+  1702→}
+  1703→.timeline-role {
+  1704→  font-family: var(--font-fraunces), "Fraunces", serif;
+  1705→  font-weight: 600;
+  1706→  font-size: 18px;
+  1707→  letter-spacing: -0.01em;
+  1708→  margin-bottom: 4px;
+  1709→  color: var(--ink);
+  1710→  transition: color 0.25s ease;
+  1711→}
+  1712→.timeline-item:hover .timeline-role { color: var(--gold-1); }
+  1713→.timeline-org {
+  1714→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1715→  font-size: 11.5px;
+  1716→  letter-spacing: 0.08em;
+  1717→  color: var(--ink-dim);
+  1718→  margin-bottom: 8px;
+  1719→  text-transform: uppercase;
+  1720→}
+  1721→.timeline-desc {
+  1722→  font-family: var(--font-manrope), "Manrope", sans-serif;
+  1723→  font-size: 14px;
+  1724→  line-height: 1.65;
+  1725→  color: var(--ink-dim);
+  1726→  max-width: 60ch;
+  1727→}
+  1728→
+  1729→/* ============================================================
+  1730→   FOOTER
+  1731→============================================================ */
+  1732→.portfolio-footer {
+  1733→  margin-top: 80px;
+  1734→  padding: 36px clamp(20px, 5vw, 56px);
+  1735→  border-top: 1px solid var(--line);
+  1736→  display: flex;
+  1737→  justify-content: space-between;
+  1738→  align-items: center;
+  1739→  flex-wrap: wrap;
+  1740→  gap: 18px;
+  1741→  max-width: 1180px;
+  1742→  margin-left: auto;
+  1743→  margin-right: auto;
+  1744→}
+  1745→.footer-mark {
+  1746→  font-family: var(--font-fraunces), "Fraunces", serif;
+  1747→  font-weight: 600;
+  1748→  font-size: 16px;
+  1749→  color: var(--ink);
+  1750→  letter-spacing: -0.01em;
+  1751→}
+  1752→.footer-note {
+  1753→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1754→  font-size: 10.5px;
+  1755→  letter-spacing: 0.16em;
+  1756→  text-transform: uppercase;
+  1757→  color: var(--ink-faint);
+  1758→}
+  1759→.footer-rule {
+  1760→  height: 1px;
+  1761→  background: linear-gradient(
+  1762→    90deg,
+  1763→    transparent 0%,
+  1764→    var(--gold-2) 50%,
+  1765→    transparent 100%
+  1766→  );
+  1767→  margin: 0 clamp(20px, 5vw, 56px);
+  1768→  opacity: 0.5;
+  1769→}
+  1770→
+  1771→/* ============================================================
+  1772→   LIGHTBOX (dark themed to match)
+  1773→============================================================ */
+  1774→.lightbox-overlay {
+  1775→  position: fixed;
+  1776→  inset: 0;
+  1777→  z-index: 9999;
+  1778→  background: rgba(5, 4, 3, 0.94);
+  1779→  display: flex;
+  1780→  align-items: center;
+  1781→  justify-content: center;
+  1782→  padding: 24px;
+  1783→  backdrop-filter: blur(8px);
+  1784→  -webkit-backdrop-filter: blur(8px);
+  1785→}
+  1786→.lightbox-content {
+  1787→  position: relative;
+  1788→  max-width: 980px;
+  1789→  max-height: 90vh;
+  1790→  width: 100%;
+  1791→  display: flex;
+  1792→  flex-direction: column;
+  1793→  align-items: center;
+  1794→}
+  1795→.lightbox-img {
+  1796→  max-width: 100%;
+  1797→  max-height: 78vh;
+  1798→  object-fit: contain;
+  1799→  border: 1px solid rgba(228, 193, 115, 0.25);
+  1800→  padding: 8px;
+  1801→  background: var(--bg-panel);
+  1802→  box-shadow:
+  1803→    0 0 0 1px var(--line),
+  1804→    0 30px 80px -20px rgba(0, 0, 0, 0.9),
+  1805→    0 0 60px rgba(228, 193, 115, 0.08);
+  1806→}
+  1807→.lightbox-close {
+  1808→  position: absolute;
+  1809→  top: -48px;
+  1810→  right: 0;
+  1811→  background: transparent;
+  1812→  border: 1px solid var(--line);
+  1813→  color: var(--ink);
+  1814→  font-size: 16px;
+  1815→  width: 38px;
+  1816→  height: 38px;
+  1817→  border-radius: 50%;
+  1818→  cursor: pointer;
+  1819→  display: flex;
+  1820→  align-items: center;
+  1821→  justify-content: center;
+  1822→  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  1823→}
+  1824→.lightbox-close:hover {
+  1825→  background: var(--gold-1);
+  1826→  color: var(--bg);
+  1827→  border-color: var(--gold-1);
+  1828→  transform: rotate(90deg);
+  1829→}
+  1830→.lightbox-nav {
+  1831→  position: absolute;
+  1832→  top: 50%;
+  1833→  transform: translateY(-50%);
+  1834→  background: rgba(22, 19, 16, 0.7);
+  1835→  border: 1px solid var(--line);
+  1836→  color: var(--ink);
+  1837→  font-size: 26px;
+  1838→  width: 50px;
+  1839→  height: 50px;
+  1840→  border-radius: 50%;
+  1841→  cursor: pointer;
+  1842→  display: flex;
+  1843→  align-items: center;
+  1844→  justify-content: center;
+  1845→  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  1846→  line-height: 1;
+  1847→  backdrop-filter: blur(6px);
+  1848→  -webkit-backdrop-filter: blur(6px);
+  1849→}
+  1850→.lightbox-nav:hover {
+  1851→  background: var(--gold-1);
+  1852→  color: var(--bg);
+  1853→  border-color: var(--gold-1);
+  1854→}
+  1855→.lightbox-prev { left: -68px; }
+  1856→.lightbox-next { right: -68px; }
+  1857→.lightbox-caption {
+  1858→  margin-top: 18px;
+  1859→  text-align: center;
+  1860→  display: flex;
+  1861→  flex-direction: column;
+  1862→  align-items: center;
+  1863→  gap: 6px;
+  1864→}
+  1865→.lightbox-caption > span:first-child {
+  1866→  font-family: var(--font-fraunces), "Fraunces", serif;
+  1867→  font-style: italic;
+  1868→  font-size: 14px;
+  1869→  color: var(--ink);
+  1870→  letter-spacing: -0.01em;
+  1871→}
+  1872→.lightbox-counter {
+  1873→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1874→  font-size: 11px;
+  1875→  letter-spacing: 0.18em;
+  1876→  color: var(--gold-1);
+  1877→  text-transform: uppercase;
+  1878→}
+  1879→
+  1880→/* ============================================================
+  1881→   NAV LINKS (hidden on mobile, shown as horizontal list on desktop)
+  1882→============================================================ */
+  1883→.nav-links {
+  1884→  display: flex;
+  1885→  align-items: center;
+  1886→  gap: 28px;
+  1887→  flex-shrink: 1;
+  1888→  min-width: 0;
+  1889→  overflow: hidden;
+  1890→}
+  1891→.nav-links a {
+  1892→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1893→  font-size: 11px;
+  1894→  letter-spacing: 0.14em;
+  1895→  text-transform: uppercase;
+  1896→  color: var(--ink-dim);
+  1897→  text-decoration: none;
+  1898→  position: relative;
+  1899→  padding-bottom: 2px;
+  1900→  transition: color 0.25s ease;
+  1901→}
+  1902→.nav-links a::after {
+  1903→  content: "";
+  1904→  position: absolute;
+  1905→  bottom: 0;
+  1906→  left: 0;
+  1907→  width: 0;
+  1908→  height: 1px;
+  1909→  background: var(--gold-1);
+  1910→  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  1911→}
+  1912→.nav-links a:hover { color: var(--ink); }
+  1913→.nav-links a:hover::after { width: 100%; }
+  1914→
+  1915→/* Hero eyebrow (alias, used with className="eyebrow") */
+  1916→.eyebrow {
+  1917→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1918→  font-size: 11.5px;
+  1919→  letter-spacing: 0.32em;
+  1920→  text-transform: uppercase;
+  1921→  color: var(--gold-1);
+  1922→  margin-bottom: 32px;
+  1923→  display: inline-flex;
+  1924→  align-items: center;
+  1925→  gap: 14px;
+  1926→}
+  1927→.eyebrow::before {
+  1928→  content: "";
+  1929→  width: 28px;
+  1930→  height: 1px;
+  1931→  background: var(--gold-1);
+  1932→  display: inline-block;
+  1933→}
+  1934→
+  1935→/* Hero tags */
+  1936→.hero-tags {
+  1937→  display: flex;
+  1938→  flex-wrap: wrap;
+  1939→  gap: 10px;
+  1940→  margin-top: 10px;
+  1941→}
+  1942→.tag {
+  1943→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1944→  font-size: 10.5px;
+  1945→  letter-spacing: 0.12em;
+  1946→  text-transform: uppercase;
+  1947→  color: var(--ink-dim);
+  1948→  border: 1px solid var(--line);
+  1949→  padding: 7px 16px;
+  1950→  border-radius: 2px;
+  1951→  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  1952→}
+  1953→.tag:hover {
+  1954→  border-color: var(--gold-2);
+  1955→  color: var(--gold-1);
+  1956→  background: var(--gold-soft);
+  1957→}
+  1958→
+  1959→/* Scroll cue (alias for hero-scroll-cue) */
+  1960→.scroll-cue {
+  1961→  position: absolute;
+  1962→  bottom: 28px;
+  1963→  left: 50%;
+  1964→  transform: translateX(-50%);
+  1965→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1966→  font-size: 10px;
+  1967→  letter-spacing: 0.28em;
+  1968→  text-transform: uppercase;
+  1969→  color: var(--ink-faint);
+  1970→  display: flex;
+  1971→  flex-direction: column;
+  1972→  align-items: center;
+  1973→  gap: 8px;
+  1974→}
+  1975→.scroll-cue::after {
+  1976→  content: "";
+  1977→  width: 1px;
+  1978→  height: 32px;
+  1979→  background: linear-gradient(180deg, var(--gold-1), transparent);
+  1980→  animation: scrollPulse 2.2s ease-in-out infinite;
+  1981→}
+  1982→
+  1983→/* About fact list */
+  1984→.fact-list {
+  1985→  display: flex;
+  1986→  flex-direction: column;
+  1987→  gap: 20px;
+  1988→  padding-left: 28px;
+  1989→  border-left: 1px solid var(--line);
+  1990→}
+  1991→.fact-row {
+  1992→  display: flex;
+  1993→  flex-direction: column;
+  1994→  gap: 4px;
+  1995→}
+  1996→.fact-label {
+  1997→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  1998→  font-size: 10px;
+  1999→  letter-spacing: 0.2em;
+  2000→  text-transform: uppercase;
+  2001→  color: var(--gold-1);
+  2002→}
+  2003→.fact-value {
+  2004→  font-family: var(--font-fraunces), "Fraunces", serif;
+  2005→  font-size: 17px;
+  2006→  color: var(--ink);
+  2007→  line-height: 1.35;
+  2008→  font-weight: 500;
+  2009→}
+  2010→
+  2011→/* Feature card URL */
+  2012→.feature-url {
+  2013→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  2014→  font-size: 11px;
+  2015→  letter-spacing: 0.1em;
+  2016→  text-transform: uppercase;
+  2017→  color: var(--ink-dim);
+  2018→ margin-bottom: 16px;
+  2019→  display: flex;
+  2020→  align-items: center;
+  2021→  gap: 8px;
+  2022→}
+  2023→.feature-url::before {
+  2024→  content: "";
+  2025→  width: 6px;
+  2026→  height: 6px;
+  2027→  background: var(--gold-2);
+  2028→  transform: rotate(45deg);
+  2029→  display: inline-block;
+  2030→}
+  2031→
+  2032→/* Feature bullets (alias for project-grid styling) */
+  2033→.feature-bullets {
+  2034→  display: grid;
+  2035→  grid-template-columns: repeat(2, 1fr);
+  2036→  gap: 4px 32px;
+  2037→}
+  2038→.feature-bullets > div {
+  2039→  display: flex;
+  2040→  gap: 12px;
+  2041→  align-items: flex-start;
+  2042→  font-family: var(--font-manrope), "Manrope", sans-serif;
+  2043→  font-size: 13.5px;
+  2044→  line-height: 1.55;
+  2045→  color: var(--ink-dim);
+  2046→  padding: 10px 0;
+  2047→  border-bottom: 1px solid var(--line-soft);
+  2048→  transition: color 0.25s ease, padding-left 0.25s ease, border-color 0.25s ease;
+  2049→}
+  2050→.feature-bullets > div::before {
+  2051→  content: "";
+  2052→  width: 6px;
+  2053→  height: 6px;
+  2054→  margin-top: 7px;
+  2055→  background: var(--gold-2);
+  2056→  flex-shrink: 0;
+  2057→  border-radius: 1px;
+  2058→  transform: rotate(45deg);
+  2059→  transition: background 0.25s ease, transform 0.25s ease;
+  2060→}
+  2061→.feature-bullets > div:hover {
+  2062→  color: var(--ink);
+  2063→  border-color: var(--gold-2);
+  2064→  padding-left: 6px;
+  2065→}
+  2066→.feature-bullets > div:hover::before {
+  2067→  background: var(--gold-1);
+  2068→  transform: rotate(45deg) scale(1.4);
+  2069→  box-shadow: 0 0 10px rgba(228, 193, 115, 0.5);
+  2070→}
+  2071→
+  2072→/* Credentials list (alias for credentials-list) */
+  2073→.cred-list {
+  2074→  list-style: none;
+  2075→  margin: 0;
+  2076→  padding: 0;
+  2077→  border-top: 1px solid var(--line);
+  2078→}
+  2079→.cred-row {
+  2080→  display: grid;
+  2081→  grid-template-columns: 1.4fr 2fr 0.8fr 0.8fr;
+  2082→  gap: 24px;
+  2083→  padding: 22px 4px;
+  2084→  border-bottom: 1px solid var(--line);
+  2085→  position: relative;
+  2086→  transition: background 0.3s ease, padding-left 0.3s ease;
+  2087→  align-items: baseline;
+  2088→}
+  2089→.cred-row::before {
+  2090→  content: "";
+  2091→  position: absolute;
+  2092→  left: 0;
+  2093→  top: 0;
+  2094→  bottom: 0;
+  2095→  width: 2px;
+  2096→  background: var(--gold-1);
+  2097→  transform: scaleY(0);
+  2098→  transform-origin: top;
+  2099→  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  2100→}
+  2101→.cred-row:hover {
+  2102→  background: rgba(228, 193, 115, 0.04);
+  2103→  padding-left: 18px;
+  2104→}
+  2105→.cred-row:hover::before { transform: scaleY(1); }
+  2106→.cred-row-firm {
+  2107→  font-family: var(--font-fraunces), "Fraunces", serif;
+  2108→  font-weight: 600;
+  2109→  font-size: 19px;
+  2110→  letter-spacing: -0.01em;
+  2111→  color: var(--ink);
+  2112→  line-height: 1.2;
+  2113→}
+  2114→.cred-row-status {
+  2115→  font-family: var(--font-manrope), "Manrope", sans-serif;
+  2116→  font-size: 14px;
+  2117→  color: var(--ink-dim);
+  2118→  line-height: 1.45;
+  2119→}
+  2120→.cred-row-amount {
+  2121→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  2122→  font-size: 13.5px;
+  2123→  font-weight: 500;
+  2124→  color: var(--gold-1);
+  2125→  text-align: right;
+  2126→}
+  2127→.cred-row-date {
+  2128→  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+  2129→  font-size: 12px;
+  2130→  letter-spacing: 0.06em;
+  2131→  color: var(--ink-faint);
+
+[showing lines 132-2131 of 2591; use offset=2132 with limit to continue reading]
