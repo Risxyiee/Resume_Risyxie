@@ -2508,177 +2508,189 @@
    PRINT STYLES — clean, ink-on-paper, hide nav/grain/lightbox
 ============================================================ */
 @media print {
+  /* Hide interactive-only elements */
   .site-nav,
   .grain-overlay,
   .vignette,
   .snake-particles-canvas,
   .lightbox-overlay,
   .hero-scroll-cue,
+  .scroll-cue,
   .print-bar,
   .print-btn,
-  .lang-toggle, .lang-toggle-btn {
+  .lang-toggle, .lang-toggle-btn,
+  .h-progress-rail, .h-dots {
     display: none !important;
   }
 
+  /* Keep dark theme */
   html, body {
-    background: #fff !important;
-    color: #111 !important;
-    font-size: 11pt;
+    background: #0B0A08 !important;
+    color: #F2ECE0 !important;
+    font-size: 10pt;
+  }
+  ::selection { background: rgba(228, 193, 115, 0.3); }
+
+  /* Horizontal track collapses to vertical */
+  .h-track {
+    display: block !important;
+    height: auto !important;
+    width: auto !important;
+    overflow: visible !important;
+  }
+  .h-panel {
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+  .hero-panel {
+    min-height: auto !important;
+    padding: 30px 40px !important;
+  }
+  .h-panel-inner {
+    height: auto !important;
+    overflow: visible !important;
+    max-width: none !important;
+    padding: 24px 40px !important;
   }
 
-  ::selection { background: #ccc; }
-
-  .hero {
-    min-height: auto;
-    padding: 0 0 18px 0;
-    page-break-after: avoid;
-  }
+  /* Hero — dark theme */
   .hero-name {
-    color: #111 !important;
-    font-size: 32pt;
-    -webkit-text-fill-color: #111;
+    color: #F2ECE0 !important;
+    font-size: 28pt;
   }
-  .hero-name .gold-text,
-  .gold-text {
-    color: #4A1518 !important;
-    -webkit-text-fill-color: #4A1518;
-    background: none !important;
+  .hero-name .gold-text, .gold-text {
+    color: #E4C173 !important;
+    -webkit-text-fill-color: #E4C173;
+    background: linear-gradient(90deg, #E4C173, #9C7A3C) !important;
+    background-clip: text !important;
     animation: none !important;
   }
-  .hero-role, .hero-eyebrow, .hero-meta-label, .section-kicker, .timeline-period, .cred-date {
-    color: #555 !important;
-  }
-  .hero-meta-value, .timeline-org, .cred-status, .summary, .timeline-desc, .project-desc, .feature-card-desc {
-    color: #222 !important;
-  }
+  .hero-role, .hero-eyebrow { color: #96897A !important; }
   .hero-rule {
-    background: #4A1518 !important;
+    background: linear-gradient(90deg, #E4C173, #9C7A3C, transparent) !important;
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
   }
+  .tag { color: #96897A !important; border-color: #2A241C !important; }
 
+  /* Section heads */
   .section {
-    padding: 18px 0 !important;
+    padding: 18px 40px !important;
     max-width: none !important;
     page-break-inside: avoid;
   }
-  .section-title { color: #111 !important; font-size: 16pt; }
+  .section-title { color: #F2ECE0 !important; font-size: 14pt; }
   .section-num {
-    color: #4A1518 !important;
-    border-color: #4A1518 !important;
+    color: #E4C173 !important;
+    border-color: #9C7A3C !important;
     background: transparent !important;
   }
-  .section-rule { background: #999 !important; opacity: 0.6 !important; }
+  .section-rule { background: #2A241C !important; opacity: 1 !important; }
 
-  .portfolio-page {
-    max-width: none !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-  }
-
+  /* Feature cards — dark background */
   .feature-card, .project {
-    background: #fff !important;
-    border: 1px solid #ccc !important;
+    background: #161310 !important;
+    border: 1px solid #2A241C !important;
     box-shadow: none !important;
     transform: none !important;
-    padding: 14px !important;
+    padding: 18px 20px !important;
     page-break-inside: avoid;
   }
   .feature-card::before, .project::before,
   .feature-card::after, .project::after { display: none !important; }
-  .feature-card-name, .project-name { color: #111 !important; }
-  .feature-card-tag, .project-tag {
-    background: #f0ece4 !important;
-    color: #4A1518 !important;
-    border-color: #ccc !important;
-  }
-  .capability, .skill-item { color: #222 !important; }
-  .capability::before, .skill-bar { background: #4A1518 !important; box-shadow: none !important; }
-  .skill-bar-wrap { background: #ddd !important; }
+  .feature-card-name, .project-name { color: #F2ECE0 !important; }
+  .feature-url { color: #E4C173 !important; }
+  .feature-bullets > div { color: #96897A !important; border-color: #2A241C !important; }
+  .feature-bullets > div::before { background: #9C7A3C !important; }
 
-  .credentials-list { border-color: #999 !important; }
-  .cred-list { border-color: #999 !important; }
-  .credential-row, .cred-row {
-    border-color: #ccc !important;
+  /* Project card images — keep visible */
+  .project-card-images { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; margin-bottom: 16px !important; }
+  .project-card-image-wrap { border-color: #2A241C !important; background: #161310 !important; }
+  .project-card-image-wrap img { filter: saturate(0.9) brightness(0.92) !important; }
+  .project-card-image-wrap::after { display: none !important; }
+
+  /* About */
+  .about-lead { color: #F2ECE0 !important; }
+  .summary { color: #96897A !important; }
+  .fact-label { color: #96897A !important; }
+  .fact-value { color: #F2ECE0 !important; }
+  .fact-row { border-color: #2A241C !important; }
+
+  /* Credentials */
+  .cred-list { border-color: #2A241C !important; }
+  .cred-row {
+    border-color: #2A241C !important;
     background: none !important;
     padding-left: 0 !important;
   }
-  .credential-row::before, .cred-row::before { display: none !important; }
-  .cred-firm, .cred-row-firm { color: #111 !important; }
-  .cred-amount, .cred-row-amount { color: #4A1518 !important; }
+  .cred-row::before { display: none !important; }
+  .cred-row-firm { color: #F2ECE0 !important; }
+  .cred-row-status { color: #96897A !important; }
+  .cred-row-amount { color: #E4C173 !important; }
+  .cred-row-date { color: #96897A !important; }
 
-  .ledger, .ledger-column { border-color: #ccc !important; }
-  .ledger-column-title { color: #4A1518 !important; }
-  .ledger-column-title::before { border-color: #4A1518 !important; }
-  .ledger-item { border-color: #ddd !important; background: none !important; padding-left: 0 !important; }
-  .ledger-skill { color: #111 !important; }
-  .ledger-meter { color: #4A1518 !important; }
-  .ledger-meter::before { background: #4A1518 !important; }
+  /* Skills ledger */
+  .ledger, .ledger-column { border-color: #2A241C !important; }
+  .ledger-column-title { color: #E4C173 !important; }
+  .ledger-column-title::before { border-color: #9C7A3C !important; }
+  .ledger-item { border-color: #2A241C !important; background: none !important; padding-left: 0 !important; }
+  .ledger-skill { color: #F2ECE0 !important; }
+  .ledger-meter { color: #E4C173 !important; }
+  .ledger-meter::before { background: #9C7A3C !important; }
 
-  .timeline-line {
-    background: #999 !important;
-    opacity: 0.5 !important;
-  }
+  /* Timeline */
+  .timeline-line { background: #2A241C !important; opacity: 1 !important; }
   .timeline-item::before {
-    background: #fff !important;
-    border-color: #4A1518 !important;
+    background: #0B0A08 !important;
+    border-color: #E4C173 !important;
     box-shadow: none !important;
   }
-  .timeline-role { color: #111 !important; }
-  .timeline-item:hover .timeline-role { color: #111 !important; }
+  .timeline-period { color: #96897A !important; }
+  .timeline-role { color: #F2ECE0 !important; }
+  .timeline-org { color: #F2ECE0 !important; }
+  .timeline-desc { color: #96897A !important; }
 
+  /* Certificates & photos */
   .frame, .cert-thumb, .photo-thumb, .photo-frame {
-    background: #fff !important;
-    border-color: #ccc !important;
+    background: #161310 !important;
+    border-color: #2A241C !important;
     box-shadow: none !important;
     transform: none !important;
     padding: 6px !important;
     page-break-inside: avoid;
   }
   .frame::before, .frame::after, .cert-thumb::before, .photo-thumb::after, .photo-frame::after { display: none !important; }
-  .photo-thumb img, .photo-frame img { filter: none !important; height: 180px !important; }
-  .frame-name, .cert-thumb-label { color: #111 !important; }
-  .frame-tag { color: #4A1518 !important; }
+  .photo-thumb img, .photo-frame img { filter: saturate(0.85) brightness(0.9) !important; height: 180px !important; }
+  .frame-name { color: #F2ECE0 !important; }
+  .frame-tag { color: #E4C173 !important; }
 
-  .evidence-label-text { color: #4A1518 !important; }
-  .evidence-label-line { background: #999 !important; }
-
+  /* Footer */
   .portfolio-footer {
-    border-color: #999 !important;
+    border-color: #2A241C !important;
     margin-top: 24px !important;
-    padding: 14px 0 !important;
+    padding: 18px 40px !important;
   }
-  .footer-mark { color: #111 !important; }
-  .footer-note { color: #555 !important; }
-  .footer-rule { background: #999 !important; opacity: 0.5 !important; }
+  .footer-mark { color: #E4C173 !important; }
+  .big { color: #F2ECE0 !important; }
+  .footer-links a {
+    color: #E4C173 !important;
+    border-color: #9C7A3C !important;
+  }
+  .footer-bottom span { color: #96897A !important; }
+  .footer-rule { background: #2A241C !important; opacity: 1 !important; }
 
+  /* Global */
   * {
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
     animation: none !important;
     transition: none !important;
   }
-
   .reveal, .reveal-stagger > * {
     opacity: 1 !important;
     transform: none !important;
   }
-
-  /* Legacy deck (in case it still renders) reverts to stacked doc */
-  .deck-wrapper {
-    position: static !important;
-    background: #fff !important;
-    color: #111 !important;
-  }
-  .deck-progress-rail, .deck-counter, .deck-dots, .deck-arrows,
-  .deck-slide-crop { display: none !important; }
-  .deck { display: block !important; height: auto !important; overflow: visible !important; }
-  .deck-slide {
-    min-width: 0 !important;
-    height: auto !important;
-    overflow: visible !important;
-    background-image: none !important;
-  }
-  .deck-slide-inner { padding: 0 !important; max-width: none !important; min-height: 0 !important; display: block !important; }
 }
