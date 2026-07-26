@@ -2,16 +2,25 @@ export type Locale = "id" | "en";
 
 export const translations = {
   id: {
-    meta: {
-      title: "Rizqi Akbar Pratama — Portofolio",
-      description:
-        "Portofolio Rizqi Akbar Pratama — Builder, Solo Developer & Funded Trader dari Kebumen, Jawa Tengah.",
+    nav: {
+      about: "Tentang",
+      project: "Proyek",
+      credentials: "Kredensial",
+      skills: "Kemampuan",
+      experience: "Pengalaman",
+      contact: "Kontak",
     },
-    printBtn: "Unduh sebagai PDF",
-    titleBlock: {
-      role: "Builder · Solo Developer · Funded Trader",
-      rev: "REV. 2026 · KEBUMEN, ID",
-      fields: {
+    hero: {
+      eyebrow: "Kebumen, Jawa Tengah · Rev. 2026",
+      role:
+        "Builder, solo developer, dan funded trader.||Membangun LuxTrade dari nol tanpa latar belakang ilmu komputer formal — dan lolos evaluasi di empat prop firm berbeda.",
+      tags: ["Solo Developer", "Funded Trader", "Founder, LuxTrade"],
+    },
+    about: {
+      title: "Tentang",
+      p1: 'Berlatar belakang <strong>Teknik Pemesinan</strong>, bukan ilmu komputer formal — tapi membangun dan menjalankan <strong>LuxTrade</strong>, aplikasi jurnal trading berbasis AI, dari nol: mengarahkan AI coding agent, membaca log produksi, mengaudit keamanan database, dan mengambil keputusan produk & harga sendiri.',
+      p2: 'Di luar itu, seorang <strong>trader yang lolos evaluasi di empat prop firm berbeda</strong> dan menjalankan usaha bakso kecil-kecilan. Terbiasa kerja teliti, sistematis, dan nggak nyerah sebelum akar masalah beneran ketemu.',
+      facts: {
         email: "Email",
         location: "Lokasi",
         education: "Pendidikan",
@@ -20,18 +29,17 @@ export const translations = {
         focusVal: "Produk digital & trading",
       },
     },
-    summary:
-      'Berlatar belakang <strong>Teknik Pemesinan</strong>, bukan ilmu komputer formal — tapi membangun dan menjalankan <strong>LuxTrade</strong>, aplikasi jurnal trading berbasis AI, dari nol: mengarahkan AI coding agent, membaca log produksi, mengaudit keamanan database, dan mengambil keputusan produk & harga sendiri. Di luar itu, seorang <strong>trader yang lolos evaluasi di empat prop firm berbeda</strong> dan menjalankan usaha bakso kecil-kecilan. Terbiasa kerja teliti, sistematis, dan nggak nyerah sebelum akar masalah beneran ketemu.',
     sections: {
-      project: "Proyek Utama",
-      credentials: "Kredensial Trading",
+      about: "Tentang",
+      project: "Proyek",
+      credentials: "Kredensial",
       skills: "Kemampuan",
       experience: "Pengalaman",
-      education: "Pendidikan",
+      contact: "Kontak",
     },
     project: {
       name: "LuxTrade",
-      tag: "luxtradee.web.id",
+      url: "luxtradee.web.id",
       desc: "Trading journal SaaS berbasis AI untuk trader retail Indonesia. Fitur utama: ekstraksi data trade otomatis dari screenshot MT4/MT5 pakai AI vision, sistem achievement & reward, program affiliate, dan dashboard analitik. Dibangun dan dioperasikan sendiri sebagai solo developer — mulai dari arsitektur, keamanan, sampai keputusan harga & go-to-market.",
       capabilities: [
         "Mengarahkan AI coding agent untuk membangun & memperbaiki fitur produksi",
@@ -43,7 +51,6 @@ export const translations = {
       ],
     },
     credentials: {
-      headers: ["Firm", "Status", "Ukuran Akun", "Tanggal"],
       rows: [
         {
           firm: "Aquafunded",
@@ -70,7 +77,6 @@ export const translations = {
           date: "22 Jul 2026",
         },
       ],
-      evidenceLabel: "Bukti Sertifikat",
     },
     skills: {
       groups: [
@@ -107,7 +113,6 @@ export const translations = {
           role: "Pemilik Usaha",
           org: "Usaha Bakso (skala kecil)",
           desc: "Menjalankan usaha kuliner kecil-kecilan secara mandiri.",
-          evidenceLabel: "Bukti Usaha Bakso",
         },
         {
           period: "6 bulan",
@@ -127,21 +132,37 @@ export const translations = {
       org: "Kebumen, Jawa Tengah",
     },
     footer: {
-      left: "RIZQI AKBAR PRATAMA — PORTOFOLIO",
+      big: "Mari bicarakan proyek atau kolaborasi berikutnya.",
+      email: "riskiakbarp123@gmail.com",
+      website: "luxtradee.web.id",
+      bottomLeft: "RIZQI AKBAR PRATAMA",
+      bottomRight: "REV. 2026",
     },
+    scrollCue: "GESER KE BAWAH",
+    scrollDown: "Geser ke bawah",
+    printBtn: "Unduh sebagai PDF",
     langToggle: "EN",
   },
   en: {
-    meta: {
-      title: "Rizqi Akbar Pratama — Portfolio",
-      description:
-        "Portfolio of Rizqi Akbar Pratama — Builder, Solo Developer & Funded Trader from Kebumen, Central Java.",
+    nav: {
+      about: "About",
+      project: "Project",
+      credentials: "Credentials",
+      skills: "Skills",
+      experience: "Experience",
+      contact: "Contact",
     },
-    printBtn: "Download as PDF",
-    titleBlock: {
-      role: "Builder · Solo Developer · Funded Trader",
-      rev: "REV. 2026 · KEBUMEN, ID",
-      fields: {
+    hero: {
+      eyebrow: "Kebumen, Central Java · Rev. 2026",
+      role:
+        "Builder, solo developer, and funded trader.||Building LuxTrade from scratch without a formal computer science background — and passing evaluations at four different prop firms.",
+      tags: ["Solo Developer", "Funded Trader", "Founder, LuxTrade"],
+    },
+    about: {
+      title: "About",
+      p1: 'From a <strong>Machining Engineering</strong> background — not formal computer science — but built and operates <strong>LuxTrade</strong>, an AI-powered trading journal app, from scratch: directing AI coding agents, reading production logs, auditing database security, and making product & pricing decisions independently.',
+      p2: 'Outside of that, a <strong>trader who passed evaluations at four different prop firms</strong> and runs a small bakso (meatball soup) business. Used to meticulous, systematic work — and not giving up until the root cause is truly found.',
+      facts: {
         email: "Email",
         location: "Location",
         education: "Education",
@@ -150,18 +171,17 @@ export const translations = {
         focusVal: "Digital products & trading",
       },
     },
-    summary:
-      'From a <strong>Machining Engineering</strong> background — not formal computer science — but built and operates <strong>LuxTrade</strong>, an AI-powered trading journal app, from scratch: directing AI coding agents, reading production logs, auditing database security, and making product & pricing decisions independently. Outside of that, a <strong>trader who passed evaluations at four different prop firms</strong> and runs a small bakso (meatball soup) business. Used to meticulous, systematic work — and not giving up until the root cause is truly found.',
     sections: {
-      project: "Featured Project",
-      credentials: "Trading Credentials",
+      about: "About",
+      project: "Project",
+      credentials: "Credentials",
       skills: "Skills",
       experience: "Experience",
-      education: "Education",
+      contact: "Contact",
     },
     project: {
       name: "LuxTrade",
-      tag: "luxtradee.web.id",
+      url: "luxtradee.web.id",
       desc: "AI-powered trading journal SaaS for Indonesian retail traders. Key features: automatic trade data extraction from MT4/MT5 screenshots via AI vision, achievement & reward system, affiliate program, and analytics dashboard. Built and operated solo as a solo developer — from architecture and security to pricing decisions and go-to-market strategy.",
       capabilities: [
         "Directing AI coding agents to build & fix production features",
@@ -173,7 +193,6 @@ export const translations = {
       ],
     },
     credentials: {
-      headers: ["Firm", "Status", "Account Size", "Date"],
       rows: [
         {
           firm: "Aquafunded",
@@ -200,7 +219,6 @@ export const translations = {
           date: "Jul 22, 2026",
         },
       ],
-      evidenceLabel: "Certificate Evidence",
     },
     skills: {
       groups: [
@@ -237,7 +255,6 @@ export const translations = {
           role: "Business Owner",
           org: "Bakso Business (small scale)",
           desc: "Running a small food business independently.",
-          evidenceLabel: "Bakso Business Evidence",
         },
         {
           period: "6 months",
@@ -257,10 +274,17 @@ export const translations = {
       org: "Kebumen, Central Java",
     },
     footer: {
-      left: "RIZQI AKBAR PRATAMA — PORTFOLIO",
+      big: "Let\u2019s talk about your next project or collaboration.",
+      email: "riskiakbarp123@gmail.com",
+      website: "luxtradee.web.id",
+      bottomLeft: "RIZQI AKBAR PRATAMA",
+      bottomRight: "REV. 2026",
     },
+    scrollCue: "SCROLL DOWN",
+    scrollDown: "Scroll down",
+    printBtn: "Download as PDF",
     langToggle: "ID",
-    },
+  },
 } as const;
 
 export type TranslationKey = typeof translations.id;

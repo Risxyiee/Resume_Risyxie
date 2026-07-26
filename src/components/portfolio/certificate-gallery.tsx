@@ -9,10 +9,9 @@ interface CertificateGalleryProps {
     alt: string;
     firm: string;
   }[];
-  evidenceLabel?: string;
 }
 
-export function CertificateGallery({ certificates, evidenceLabel = "Bukti Sertifikat" }: CertificateGalleryProps) {
+export function CertificateGallery({ certificates }: CertificateGalleryProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -28,21 +27,23 @@ export function CertificateGallery({ certificates, evidenceLabel = "Bukti Sertif
 
   return (
     <>
-      <div className="evidence-label">
-        <span className="evidence-label-text">{evidenceLabel}</span>
-        <span className="evidence-label-line" />
-      </div>
-      <div className="cert-grid">
+      <div className="frame-gallery" style={{ marginTop: 36 }}>
         {certificates.map((cert, i) => (
-          <button
+          <figure
             key={cert.src}
-            className="cert-thumb"
+            className="frame"
             onClick={() => openLightbox(i)}
-            aria-label={`Lihat sertifikat ${cert.firm}`}
+            role="button"
+            tabIndex={0}
+            aria-label={`View certificate: ${cert.firm}`}
+            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(i); }}
           >
             <img src={cert.src} alt={cert.alt} loading="lazy" />
-            <span className="cert-thumb-label">{cert.firm}</span>
-          </button>
+            <figcaption className="frame-label">
+              <span className="frame-name">{cert.firm}</span>
+              <span className="frame-tag">Cert</span>
+            </figcaption>
+          </figure>
         ))}
       </div>
       <Lightbox

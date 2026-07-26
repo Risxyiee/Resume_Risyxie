@@ -7,12 +7,11 @@ export function LanguageToggle() {
 
   return (
     <button
-      className="lang-toggle"
+      className="lang-toggle-btn"
       onClick={toggle}
       aria-label={`Switch to ${locale === "id" ? "English" : "Indonesian"}`}
     >
-      <span className="lang-toggle-icon">⇄</span>
-      <span className="lang-toggle-text">{t.langToggle}</span>
+      ⇄ {t.langToggle}
     </button>
   );
 }
