@@ -2385,6 +2385,12 @@
     flex-wrap: wrap;
     gap: 24px 48px;
   }
+
+  /* Project cards responsive — tablet */
+  .project-cards-grid { gap: 20px; }
+  .project-card-images { gap: 8px; margin-bottom: 18px; }
+  .project-card-image-wrap { aspect-ratio: 16/10; }
+  .feature-card { padding: clamp(20px, 4vw, 32px); }
 }
 
 @media (max-width: 720px) {
@@ -2418,8 +2424,19 @@
   .field:nth-child(2n) { border-right: none; }
   .field:nth-last-child(-n+2) { border-bottom: none; }
 
-  .feature-card, .project { padding: 24px 20px; }
+  .feature-card, .project { padding: 20px 16px; }
   .project-grid, .skills-grid, .feature-bullets { grid-template-columns: 1fr; }
+
+  /* Project cards responsive — phone */
+  .project-cards-grid { gap: 16px; }
+  .project-card-images {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .project-card-image-wrap { aspect-ratio: 16/9; }
+  .feature-card-name { font-size: clamp(22px, 6vw, 30px); }
+  .feature-card:hover { transform: none; }
 
   .credentials-list .credential-row {
     grid-template-columns: 1fr;
@@ -2472,6 +2489,19 @@
     gap: 8px;
     padding: 28px 20px;
   }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+  .project-card-images {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .project-card-image-wrap { aspect-ratio: 3/2; }
+  .feature-card { padding: 16px 14px; }
+  .feature-bullets > div { font-size: 12px; padding: 8px 0; }
+  .project-cards-grid { gap: 14px; }
 }
 
 /* ============================================================

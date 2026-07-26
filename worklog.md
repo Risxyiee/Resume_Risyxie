@@ -201,3 +201,23 @@ Stage Summary:
 - Both ID and EN translations verified working
 - Links verified: LuxTrade → luxtradee.web.id, Bakso → baksoaanmuda.vercel.app
 - Missing TextReveal/WordStagger/GoldLine components restored (were lost during previous session)
+---
+Task ID: 6
+Agent: Main Agent
+Task: Add Bakso Anak Muda project with images and responsive mobile layout to project panel
+
+Work Log:
+- Created ProjectCard sub-component with per-card mouse spotlight effect (each card has its own ref and handleMouseMove)
+- Added bakso food images (bakso-1.png, bakso-2.jpeg) to the Bakso Anak Muda card via project-card-images grid
+- Added project-card-images, project-card-image-wrap CSS with 2-col grid, 4:3 aspect ratio, border, hover zoom/saturate effects
+- Added responsive styles at 820px (tablet), 720px (phone), and 480px (small phone) breakpoints
+- Removed old single cardRef/handleMouseMove from main component
+- Both cards now have independent cursor spotlight hover effects
+
+Stage Summary:
+- Project panel (panel 02) renders both LuxTrade and Bakso Anak Muda cards
+- Bakso card shows 2 food photos in a 2-column grid with hover zoom effects
+- VLM verification: Desktop 9/10, iPhone 14 (390px) 9/10, Small phone (320px) 9/10
+- No text overflow, no layout issues, all images properly bordered and styled
+- ESLint passes clean, no dev server errors
+
