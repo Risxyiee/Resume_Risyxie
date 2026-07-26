@@ -132,7 +132,7 @@
 .grain-overlay {
   position: fixed;
   inset: 0;
-  z-index: 9998;
+  z-index: 50;
   pointer-events: none;
   opacity: 0.45;
   mix-blend-mode: overlay;
@@ -153,7 +153,7 @@
 .vignette {
   position: fixed;
   inset: 0;
-  z-index: 9997;
+  z-index: 49;
   pointer-events: none;
   background: radial-gradient(
     ellipse at center,
@@ -170,7 +170,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 300;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -533,7 +533,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  z-index: 200;
+  z-index: 300;
   background: rgba(42, 36, 28, 0.5);
 }
 .h-progress-fill {
@@ -547,7 +547,7 @@
   position: fixed;
   bottom: 28px;
   right: 28px;
-  z-index: 150;
+  z-index: 250;
   display: flex;
   gap: 10px;
   align-items: center;
