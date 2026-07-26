@@ -3,177 +3,144 @@
 import { useRef, useEffect, useCallback } from "react";
 
 /* ═══════════════════════════════════════════════════════════
-   Perlin noise (fast 2D)
+   Lightning Background — electric bolts that follow the cursor
    ═══════════════════════════════════════════════════════════ */
-const PERM = new Uint8Array(512);
-const GRAD: [number, number][] = [
-  [1, 1], [-1, 1], [1, -1], [-1, -1],
-  [1, 0], [-1, 0], [0, 1], [0, -1],
-];
-(function initPerm() {
-  const p = Array.from({ length: 256 }, (_, i) => i);
-  for (let i = 255; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [p[i], p[j]] = [p[j], p[i]];
-  }
-  for (let i = 0; i < 512; i++) PERM[i] = p[i & 255];
-})();
 
-function fade(t: number) { return t * t * t * (t * (t * 6 - 15) + 10); }
-function lerp(a: number, b: number, t: number) { return a + t * (b - a); }
-
-function noise2d(x: number, y: number) {
-  const X = Math.floor(x) & 255;
-  const Y = Math.floor(y) & 255;
-  const xf = x - Math.floor(x);
-  const yf = y - Math.floor(y);
-  const u = fade(xf);
-  const v = fade(yf);
-  const aa = PERM[PERM[X] + Y] & 7;
-  const ab = PERM[PERM[X] + Y + 1] & 7;
-  const ba = PERM[PERM[X + 1] + Y] & 7;
-  const bb = PERM[PERM[X + 1] + Y + 1] & 7;
-  const dot = (gi: number, dx: number, dy: number) => GRAD[gi][0] * dx + GRAD[gi][1] * dy;
-  return lerp(
-    lerp(dot(aa, xf, yf), dot(ba, xf - 1, yf), u),
-    lerp(dot(ab, xf, yf - 1), dot(bb, xf - 1, yf - 1), u),
-    v
-  );
+interface Bolt {
+  points: { x: number; y: number }[];
+  alpha: number;
+  life: number;
+  maxLife: number;
+  thickness: number;
+ hue: number;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   Snake entity
-   ═══════════════════════════════════════════════════════════ */
-interface Snake {
+interface Branch {
   points: { x: number; y: number }[];
-  segments: number;
-  speed: number;
-  noiseScale: number;
-  noiseOffset: number;
+  alpha: number;
   thickness: number;
   hue: number;
-  saturation: number;
-  lightness: number;
-  alpha: number;
-  headX: number;
-  headY: number;
-  vx: number;
-  vy: number;
 }
 
-function createSnake(w: number, h: number): Snake {
-  const segments = 80 + Math.floor(Math.random() * 100);
-  const startX = Math.random() * w;
-  const startY = Math.random() * h;
-  const angle = Math.random() * Math.PI * 2;
-  const speed = 0.3 + Math.random() * 0.5;
-  return {
-    segments,
-    speed,
-    noiseScale: 0.002 + Math.random() * 0.003,
-    noiseOffset: Math.random() * 1000,
-    thickness: 0.8 + Math.random() * 1.5,
-    hue: 30 + Math.random() * 18,        // gold range 30-48
-    saturation: 50 + Math.random() * 25,  // 50-75%
-    lightness: 45 + Math.random() * 20,   // 45-65%
-    alpha: 0.06 + Math.random() * 0.12,
-    headX: startX,
-    headY: startY,
-    vx: Math.cos(angle) * speed,
-    vy: Math.sin(angle) * speed,
-    points: Array.from({ length: segments }, () => ({ x: startX, y: startY })),
-  };
-}
-
-function updateSnake(s: Snake, time: number, w: number, h: number) {
-  // Multi-octave noise for more organic movement
-  const n1 = noise2d(
-    s.headX * s.noiseScale + s.noiseOffset,
-    s.headY * s.noiseScale + time * 0.00008
-  );
-  const n2 = noise2d(
-    s.headX * s.noiseScale * 2.5 + s.noiseOffset + 100,
-    s.headY * s.noiseScale * 2.5 + time * 0.00015
-  );
-  const angle = (n1 + n2 * 0.5) * Math.PI * 2.5;
-  s.vx += Math.cos(angle) * 0.025;
-  s.vy += Math.sin(angle) * 0.025;
-  // Limit speed
-  const mag = Math.sqrt(s.vx * s.vx + s.vy * s.vy);
-  if (mag > s.speed) {
-    s.vx = (s.vx / mag) * s.speed;
-    s.vy = (s.vy / mag) * s.speed;
+/** Generate a lightning bolt from start to end with jitter */
+function generateBolt(
+  sx: number, sy: number,
+  ex: number, ey: number,
+  segments: number,
+  jitter: number
+): { x: number; y: number }[] {
+  const pts: { x: number; y: number }[] = [{ x: sx, y: sy }];
+  const dx = ex - sx;
+  const dy = ey - sy;
+  for (let i = 1; i < segments; i++) {
+    const t = i / segments;
+    const bx = sx + dx * t + (Math.random() - 0.5) * jitter;
+    const by = sy + dy * t + (Math.random() - 0.5) * jitter;
+    pts.push({ x: bx, y: by });
   }
-  s.headX += s.vx;
-  s.headY += s.vy;
-  // Wrap around edges with padding
-  const pad = 150;
-  if (s.headX < -pad) s.headX = w + pad;
-  if (s.headX > w + pad) s.headX = -pad;
-  if (s.headY < -pad) s.headY = h + pad;
-  if (s.headY > h + pad) s.headY = -pad;
-  // Shift points and set new head
-  for (let i = 0; i < s.points.length - 1; i++) {
-    s.points[i] = s.points[i + 1];
-  }
-  s.points[s.points.length - 1] = { x: s.headX, y: s.headY };
+  pts.push({ x: ex, y: ey });
+  return pts;
 }
 
-function drawSnake(ctx: CanvasRenderingContext2D, s: Snake) {
-  const pts = s.points;
-  if (pts.length < 3) return;
+/** Generate sub-branches from a bolt */
+function generateBranches(
+  bolt: { x: number; y: number }[],
+  count: number,
+  length: number,
+  jitter: number
+): Branch[] {
+  const branches: Branch[] = [];
+  if (bolt.length < 4) return branches;
+  for (let b = 0; b < count; b++) {
+    const idx = 2 + Math.floor(Math.random() * (bolt.length - 4));
+    const origin = bolt[idx];
+    const angle = Math.random() * Math.PI * 2;
+    const ex = origin.x + Math.cos(angle) * length;
+    const ey = origin.y + Math.sin(angle) * length;
+    const pts = generateBolt(origin.x, origin.y, ex, ey, 6, jitter * 0.6);
+    branches.push({
+      points: pts,
+      alpha: 0.15 + Math.random() * 0.25,
+      thickness: 0.3 + Math.random() * 0.6,
+      hue: 35 + Math.random() * 15,
+    });
+  }
+  return branches;
+}
 
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
+function drawBolt(
+  ctx: CanvasRenderingContext2D,
+  bolt: { x: number; y: number }[],
+  alpha: number,
+  thickness: number,
+  hue: number,
+  glow: boolean
+) {
+  if (bolt.length < 2) return;
 
-  // Draw smooth curve through points
-  for (let i = 2; i < pts.length; i++) {
-    const t = i / pts.length; // 0 = tail, 1 = head
-    const alpha = t * t * s.alpha;
-    const thickness = Math.max(0.1, t * s.thickness);
-
-    const prev = pts[i - 1];
-    const curr = pts[i];
-
+  // Glow layer
+  if (glow) {
     ctx.beginPath();
-    ctx.moveTo(prev.x, prev.y);
-    ctx.lineTo(curr.x, curr.y);
-    ctx.strokeStyle = `hsla(${s.hue}, ${s.saturation}%, ${s.lightness}%, ${alpha})`;
-    ctx.lineWidth = thickness;
+    ctx.moveTo(bolt[0].x, bolt[0].y);
+    for (let i = 1; i < bolt.length; i++) {
+      ctx.lineTo(bolt[i].x, bolt[i].y);
+    }
+    ctx.strokeStyle = `hsla(${hue}, 80%, 70%, ${alpha * 0.35})`;
+    ctx.lineWidth = thickness * 4;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
     ctx.stroke();
   }
 
-  // Brighter head segment with glow
-  const head = pts[pts.length - 1];
-  const preHead = pts[pts.length - 2];
+  // Core line
   ctx.beginPath();
-  ctx.moveTo(preHead.x, preHead.y);
-  ctx.lineTo(head.x, head.y);
-  ctx.strokeStyle = `hsla(${s.hue}, ${s.saturation + 10}%, ${s.lightness + 15}%, ${s.alpha * 2})`;
-  ctx.lineWidth = s.thickness * 1.2;
+  ctx.moveTo(bolt[0].x, bolt[0].y);
+  for (let i = 1; i < bolt.length; i++) {
+    ctx.lineTo(bolt[i].x, bolt[i].y);
+  }
+  ctx.strokeStyle = `hsla(${hue}, 75%, 65%, ${alpha})`;
+  ctx.lineWidth = thickness;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
   ctx.stroke();
 
-  // Head glow dot
-  const grad = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 5);
-  grad.addColorStop(0, `hsla(${s.hue}, ${s.saturation + 10}%, ${s.lightness + 20}%, ${s.alpha * 2.5})`);
-  grad.addColorStop(1, `hsla(${s.hue}, ${s.saturation}%, ${s.lightness}%, 0)`);
+  // Bright center
+  ctx.beginPath();
+  ctx.moveTo(bolt[0].x, bolt[0].y);
+  for (let i = 1; i < bolt.length; i++) {
+    ctx.lineTo(bolt[i].x, bolt[i].y);
+  }
+  ctx.strokeStyle = `hsla(${hue}, 40%, 90%, ${alpha * 0.7})`;
+  ctx.lineWidth = thickness * 0.3;
+  ctx.stroke();
+}
+
+/** Draw cursor glow */
+function drawCursorGlow(
+  ctx: CanvasRenderingContext2D,
+  x: number, y: number,
+  hue: number,
+  intensity: number
+) {
+  const r = 80 + intensity * 40;
+  const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+  grad.addColorStop(0, `hsla(${hue}, 80%, 70%, ${0.06 + intensity * 0.04})`);
+  grad.addColorStop(0.4, `hsla(${hue}, 70%, 55%, ${0.02 + intensity * 0.02})`);
+  grad.addColorStop(1, `hsla(${hue}, 60%, 45%, 0)`);
   ctx.fillStyle = grad;
   ctx.beginPath();
-  ctx.arc(head.x, head.y, 5, 0, Math.PI * 2);
+  ctx.arc(x, y, r, 0, Math.PI * 2);
   ctx.fill();
 }
 
-/* ═══════════════════════════════════════════════════════════
-   Canvas component — fixed to viewport, snakes roam freely
-   ═══════════════════════════════════════════════════════════ */
-const SNAKE_COUNT = 14;
-
 export function SnakeParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const snakesRef = useRef<Snake[]>([]);
+  const boltsRef = useRef<Bolt[]>([]);
+  const branchesRef = useRef<Branch[]>([]);
+  const mouseRef = useRef({ x: -1000, y: -1000, active: false });
+  const prevMouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
-  const startTimeRef = useRef(0);
-  const animateRef = useRef<(ts: number) => void>();
+  const frameCount = useRef(0);
 
   const resize = useCallback(() => {
     const canvas = canvasRef.current;
@@ -189,55 +156,155 @@ export function SnakeParticles() {
     if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }, []);
 
-  const init = useCallback(() => {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    snakesRef.current = Array.from({ length: SNAKE_COUNT }, () =>
-      createSnake(w, h)
-    );
-  }, []);
-
   useEffect(() => {
-    const animate = (timestamp: number) => {
-      if (!startTimeRef.current) startTimeRef.current = timestamp;
-      const time = timestamp - startTimeRef.current;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+    const onMouseMove = (e: MouseEvent) => {
+      prevMouseRef.current = { ...mouseRef.current };
+      mouseRef.current = { x: e.clientX, y: e.clientY, active: true };
+    };
+    const onMouseLeave = () => {
+      mouseRef.current.active = false;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+      prevMouseRef.current = { ...mouseRef.current };
+      mouseRef.current = { x: t.clientX, y: t.clientY, active: true };
+    };
+    const onTouchEnd = () => {
+      mouseRef.current.active = false;
+    };
 
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+
+    const animate = () => {
+      frameCount.current++;
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const w = canvas.width / dpr;
       const h = canvas.height / dpr;
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+      const active = mouseRef.current.active;
 
-      // Fade trail — slow fade for longer trails
+      // Clear
       ctx.save();
       ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.fillStyle = "rgba(11, 10, 8, 0.045)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.restore();
 
-      // Update and draw each snake
-      for (const snake of snakesRef.current) {
-        updateSnake(snake, time, w, h);
-        drawSnake(ctx, snake);
+      // Draw cursor glow
+      if (active) {
+        drawCursorGlow(ctx, mx, my, 38, 1);
       }
+
+      // Generate new bolts near cursor
+      if (active && frameCount.current % 2 === 0) {
+        const speed = Math.sqrt(
+          (mx - prevMouseRef.current.x) ** 2 +
+          (my - prevMouseRef.current.y) ** 2
+        );
+        const boltCount = Math.min(3, 1 + Math.floor(speed / 20));
+
+        for (let i = 0; i < boltCount; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 30 + Math.random() * 120;
+          const ex = mx + Math.cos(angle) * dist;
+          const ey = my + Math.sin(angle) * dist;
+          const segments = 8 + Math.floor(Math.random() * 8);
+          const jitter = 15 + Math.random() * 30;
+          const pts = generateBolt(mx, my, ex, ey, segments, jitter);
+
+          boltsRef.current.push({
+            points: pts,
+            alpha: 0.4 + Math.random() * 0.4,
+            life: 0,
+            maxLife: 12 + Math.floor(Math.random() * 16),
+            thickness: 0.6 + Math.random() * 1.2,
+            hue: 32 + Math.random() * 18,
+          });
+
+          // Branches
+          if (Math.random() > 0.4) {
+            const newBranches = generateBranches(pts, 1 + Math.floor(Math.random() * 2), 20 + Math.random() * 40, 12);
+            branchesRef.current.push(...newBranches);
+          }
+        }
+      }
+
+      // Ambient bolts (even without cursor, occasional flickers)
+      if (frameCount.current % 30 === 0 && !active) {
+        const ax = Math.random() * w;
+        const ay = Math.random() * h;
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 40 + Math.random() * 80;
+        const ex = ax + Math.cos(angle) * dist;
+        const ey = ay + Math.sin(angle) * dist;
+        const pts = generateBolt(ax, ay, ex, ey, 6, 10);
+        boltsRef.current.push({
+          points: pts,
+          alpha: 0.15 + Math.random() * 0.15,
+          life: 0,
+          maxLife: 8 + Math.floor(Math.random() * 10),
+          thickness: 0.3 + Math.random() * 0.5,
+          hue: 35 + Math.random() * 12,
+        });
+      }
+
+      // Draw & decay bolts
+      for (let i = boltsRef.current.length - 1; i >= 0; i--) {
+        const bolt = boltsRef.current[i];
+        bolt.life++;
+        const progress = bolt.life / bolt.maxLife;
+        const fade = 1 - progress;
+        // Regenerate jitter each frame for crackling effect
+        if (bolt.life < bolt.maxLife - 2 && bolt.life % 2 === 0) {
+          const pts = bolt.points;
+          for (let j = 1; j < pts.length - 1; j++) {
+            pts[j].x += (Math.random() - 0.5) * 6;
+            pts[j].y += (Math.random() - 0.5) * 6;
+          }
+        }
+        drawBolt(ctx, bolt.points, bolt.alpha * fade, bolt.thickness * fade, bolt.hue, true);
+        if (bolt.life >= bolt.maxLife) boltsRef.current.splice(i, 1);
+      }
+
+      // Draw & decay branches
+      for (let i = branchesRef.current.length - 1; i >= 0; i--) {
+        const branch = branchesRef.current[i];
+        branch.alpha *= 0.82;
+        if (branch.alpha < 0.01) {
+          branchesRef.current.splice(i, 1);
+          continue;
+        }
+        drawBolt(ctx, branch.points, branch.alpha, branch.thickness, branch.hue, false);
+      }
+
+      // Cap arrays
+      if (boltsRef.current.length > 40) boltsRef.current.splice(0, boltsRef.current.length - 40);
+      if (branchesRef.current.length > 80) branchesRef.current.splice(0, branchesRef.current.length - 80);
 
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    animateRef.current = animate;
     resize();
-    init();
     rafRef.current = requestAnimationFrame(animate);
-    const onResize = () => resize();
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", resize);
+
     return () => {
       cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
     };
-  }, [resize, init]);
+  }, [resize]);
 
   return (
     <canvas
