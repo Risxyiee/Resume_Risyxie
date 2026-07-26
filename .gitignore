@@ -54,3 +54,4 @@ server.log
 /skills/tool-results/
 verify-*.png
 dev.log
+tool-results/

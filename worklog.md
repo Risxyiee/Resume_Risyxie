@@ -175,3 +175,29 @@ Stage Summary:
 - Verified via browser automation: toggle button visible, language switching works (ID↔EN)
 - VLM screenshot analysis confirms both features working
 - ESLint passes clean, no errors in dev.log
+
+---
+Task ID: 5
+Agent: Main Agent
+Task: Replace snake particles with cursor-following lightning + fix z-index + push to GitHub + add Bakso project to panel 02
+
+Work Log:
+- Replaced snake particle background with cursor-following gold lightning effect in snake-particles.tsx:
+  - Gold lightning bolts that follow cursor position with random branching
+  - Crackling jitter animation for realistic electrical effect
+  - Ambient flickers between cursor moves
+  - Cursor glow (radial gradient) at cursor position
+  - Kept filename snake-particles.tsx but content is entirely lightning
+- Fixed z-index layering: canvas z-index:0, h-track z-index:2 (content above lightning)
+- Pushed code to GitHub (https://github.com/Risxyiee/Resume_Risyxie.git)
+- Added Bakso Anak Muda project to i18n.ts (both ID and EN translations)
+- Fixed missing TextReveal, WordStagger, GoldLine component definitions in portfolio-content.tsx
+- Project panel (panel 02) now renders both LuxTrade and Bakso Anak Muda as stacked feature cards
+
+Stage Summary:
+- Lightning background follows cursor with gold bolts, branches, and crackling jitter
+- Z-index layering: canvas(0) < h-track(2) < grain(50) < vignette(49) < nav(300)
+- Project panel shows 2 project cards: LuxTrade (6 capabilities) and Bakso Anak Muda (4 capabilities)
+- Both ID and EN translations verified working
+- Links verified: LuxTrade → luxtradee.web.id, Bakso → baksoaanmuda.vercel.app
+- Missing TextReveal/WordStagger/GoldLine components restored (were lost during previous session)

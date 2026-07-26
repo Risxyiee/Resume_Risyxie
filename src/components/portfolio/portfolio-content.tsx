@@ -67,6 +67,46 @@ function PopIn({ children, delay = 0, className }: { children: ReactNode; delay?
   );
 }
 
+/** Animated gold decorative line */
+function GoldLine({ delay = 0, className, style }: { delay?: number; className?: string; style?: React.CSSProperties }) {
+  return (
+    <motion.div className={className} style={{ height: 1, background: "linear-gradient(90deg, var(--gold-1), var(--gold-2), transparent)", ...style }}
+      initial={{ scaleX: 0, opacity: 0 }}
+      whileInView={{ scaleX: 1, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay, ease }}
+    />
+  );
+}
+
+/** Text reveal with clip-path animation */
+function TextReveal({ children, delay = 0, className, as: Tag = "div" }: { children: ReactNode; delay?: number; className?: string; as?: React.ElementType }) {
+  return (
+    <motion.div className={className}
+      initial={{ opacity: 0, y: 18, filter: "blur(4px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-20px" }}
+      transition={{ duration: 0.7, delay, ease }}
+    >{children}</motion.div>
+  );
+}
+
+/** Word-by-word stagger reveal */
+function WordStagger({ text, delay = 0, className }: { text: string; delay?: number; className?: string }) {
+  const words = text.split(" ");
+  return (
+    <motion.div className={className} initial="hidden" whileInView="visible" viewport={{ once: true }}
+      variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.03, delayChildren: delay } } }}
+    >
+      {words.map((word, i) => (
+        <motion.span key={i} style={{ display: "inline-block", marginRight: "0.3em" }}
+          variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease } } }}
+        >{word}</motion.span>
+      ))}
+    </motion.div>
+  );
+}
+
 /** Stagger container — children get automatic delays */
 function Stagger({ children, className, stagger = 0.07 }: { children: ReactNode; className?: string; stagger?: number }) {
   const ref = useRef(null);
