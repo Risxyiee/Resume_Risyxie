@@ -296,6 +296,7 @@ export function PortfolioContent() {
   const projectImages: Record<string, string[]> = {
     [t.projects[0].name]: [],
     [t.projects[1].name]: ["/evidence/bakso-1.png", "/evidence/bakso-2.jpeg"],
+    [t.projects[2].name]: ["/evidence/pesanlagi-1.png", "/evidence/pesanlagi-2.png"],
   };
   const factEntries = [
     { label: t.about.facts.email, value: "riskiakbarp123@gmail.com" },
@@ -593,6 +594,7 @@ export function PortfolioContent() {
               <a href={`mailto:${t.footer.email}`}>{t.footer.email}</a>
               <a href="https://luxtradee.web.id" target="_blank" rel="noopener noreferrer">{t.footer.website}</a>
               <a href="https://baksoaanmuda.vercel.app/" target="_blank" rel="noopener noreferrer">{t.footer.baksoWebsite}</a>
+              <a href="https://pesanlagi.web.id" target="_blank" rel="noopener noreferrer">{t.footer.pesanlagiWebsite}</a>
             </motion.div>
             <motion.div className="footer-bottom"
               initial={{ opacity: 0 }}

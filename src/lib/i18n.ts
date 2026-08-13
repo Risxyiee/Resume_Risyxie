@@ -64,6 +64,18 @@ export const translations = {
           "Kehadiran digital untuk UMKM lokal",
         ],
       },
+      {
+        name: "PesanLagi",
+        url: "pesanlagi.web.id",
+        link: "https://pesanlagi.web.id",
+        desc: "Platform QR Menu Digital untuk warung, kafe, dan usaha kuliner lokal Indonesia. Digunakan 86+ warung & kafe dengan 43K+ scan menu per bulan. Fitur: menu digital interaktif, kategori otomatis, status buka/tutup real-time, dan dashboard analitik pemilik usaha. Dibangun dari nol sebagai solo developer.",
+        capabilities: [
+          "Ide, desain produk, & development end-to-end",
+          "Sistem QR code generation & scanning analytics",
+          "Dashboard pemilik usaha dengan statistik real-time",
+          "UI/UX mobile-first untuk pelanggan warung & kafe",
+        ],
+      },
     ],
     credentials: {
       rows: [
@@ -151,6 +163,7 @@ export const translations = {
       email: "riskiakbarp123@gmail.com",
       website: "luxtradee.web.id",
       baksoWebsite: "baksoaanmuda.vercel.app",
+      pesanlagiWebsite: "pesanlagi.web.id",
       bottomLeft: "RIZQI AKBAR PRATAMA",
       bottomRight: "REV. 2026",
     },
@@ -220,6 +233,18 @@ export const translations = {
           "Bakso product photography",
           "Visual presentation for food business",
           "Digital presence for local small businesses",
+        ],
+      },
+      {
+        name: "PesanLagi",
+        url: "pesanlagi.web.id",
+        link: "https://pesanlagi.web.id",
+        desc: "QR Code digital menu platform for warungs, cafes, and local food businesses in Indonesia. Used by 86+ warungs & cafes with 43K+ monthly menu scans. Features: interactive digital menu, auto categories, real-time open/closed status, and owner analytics dashboard. Built from scratch as a solo developer.",
+        capabilities: [
+          "Product ideation, design & end-to-end development",
+          "QR code generation system & scanning analytics",
+          "Owner dashboard with real-time statistics",
+          "Mobile-first UI/UX for warung & cafe customers",
         ],
       },
     ],
@@ -309,6 +334,7 @@ export const translations = {
       email: "riskiakbarp123@gmail.com",
       website: "luxtradee.web.id",
       baksoWebsite: "baksoaanmuda.vercel.app",
+      pesanlagiWebsite: "pesanlagi.web.id",
       bottomLeft: "RIZQI AKBAR PRATAMA",
       bottomRight: "REV. 2026",
     },
